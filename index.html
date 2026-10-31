@@ -7,131 +7,78 @@
     <style>
         body {
             background-color: #d2e4f0;
-            background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px);
-            background-size: 20px 20px;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0;
+            padding: 30px 15px;
             color: #334155;
             margin: 0;
         }
 
-        .browser-window {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            border-left: 1px solid #b4c6d4;
-            border-right: 1px solid #b4c6d4;
-            box-shadow: 0 0 20px rgba(0,0,0,0.08);
-            min-height: 100vh;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 0 40px 0;
+        /* O cabeçalho clássico que havia sumido */
+        .header-link {
+            font-size: 13px;
+            color: #5a738e;
+            text-decoration: none;
+            margin-bottom: 6px;
+            font-weight: bold;
         }
-
-        .browser-top-bar {
-            width: 100%;
-            background: #f1f5f9;
-            border-bottom: 1px solid #cbd5e1;
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-sizing: border-box;
-        }
-
-        .browser-dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #cbd5e1;
-        }
-        .dot.red { background: #fc8181; }
-        .dot.yellow { background: #f6e05e; }
-        .dot.green { background: #68d391; }
-
-        .browser-address {
-            background: white;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            padding: 4px 12px;
+        .header-title {
             font-size: 11px;
-            color: #64748b;
-            flex-grow: 1;
-            max-width: 320px;
+            letter-spacing: 2px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
-        .page-content-wrapper {
+        .container {
             width: 100%;
             max-width: 480px;
-            padding: 30px 15px 0 15px;
-            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .header-title-jap {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #7f8c8d;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
+        /* Títulos originais do topo do painel */
         .main-title {
             font-family: 'Georgia', serif;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: bold;
-            color: #3b5998;
-            margin: 5px 0 2px 0;
+            color: #2c3e50;
+            margin: 0 0 4px 0;
             text-align: center;
-            letter-spacing: -0.5px;
         }
-
         .subtitle {
-            font-size: 13px;
+            font-size: 14px;
             color: #7f8c8d;
-            margin: 0 0 15px 0;
+            margin: 0 0 20px 0;
             text-align: center;
             font-weight: bold;
         }
 
+        /* Moldura Polaroid Polida para o seu Desenho */
         .art-cover-wrapper {
             background: white;
-            padding: 14px 14px 64px 14px;
-            border-radius: 2px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            padding: 16px 16px 60px 16px;
+            border-radius: 4px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
             border: 1px solid #eef2f5;
+            margin-bottom: 5px;
             position: relative;
-            box-sizing: border-box;
-            width: 100%;
         }
-
         .art-cover {
             width: 100%;
             height: auto;
+            border-radius: 2px;
             display: block;
             border: 1px solid #f0f0f0;
         }
-
         .polaroid-label {
             position: absolute;
             bottom: 16px;
-            right: 14px;
+            right: 18px;
             background-color: white;
             border: 1px solid #e2aec7;
             padding: 6px 14px;
@@ -144,21 +91,23 @@
             font-style: italic;
         }
 
-        /* Painel Superior do Player */
+        /* Painel Superior do Player Arredondado */
         .player-panel {
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
             border-radius: 20px;
-            padding: 14px;
-            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.15);
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.25);
         }
 
+        /* Corpo da Fita Cassete Rosa */
         .cassette-player {
             background-color: #f7d1e3;
             border: 2px solid #e2aec7;
             border-radius: 14px;
             padding: 16px;
             position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
         }
 
         .stereo-mix-header {
@@ -196,6 +145,7 @@
             text-transform: uppercase;
         }
 
+        /* Visor Interno Escuro Clássico da Fita */
         .cassette-center {
             background: #1e1e1e;
             height: 110px;
@@ -243,74 +193,44 @@
             line-height: 1.3;
         }
 
-        /* Botões Maiores e Evidentes Estilo Equipamento Retrô */
+        /* Rodapé de comandos da fita */
         .cassette-footer {
-            margin-top: 18px;
+            margin-top: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .layout-signature {
             font-size: 10px;
             color: #b3839b;
             font-weight: bold;
         }
 
-        .control-actions {
-            display: flex;
-            gap: 8px;
-        }
-
         .control-actions button {
-            background: #ffffff;
-            border: 2px solid #b85b88;
-            border-radius: 8px;
+            background: none;
+            border: none;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 12px;
-            font-weight: bold;
-            color: #b85b88;
+            font-size: 10px;
             cursor: pointer;
-            padding: 8px 14px;
-            box-shadow: 0 4px 0px #943d66; /* Efeito 3D clássico */
-            transition: all 0.1s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            color: #b3839b;
+            font-weight: bold;
+            padding: 2px 6px;
+            text-transform: uppercase;
         }
 
         .control-actions button:hover {
-            background: #fff0f5;
-            transform: translateY(1px);
-            box-shadow: 0 3px 0px #943d66;
-        }
-
-        .control-actions button:active {
-            transform: translateY(4px);
-            box-shadow: 0 0px 0px #943d66; /* Botão totalmente afundado */
-        }
-
-        /* Caixa de Notas Muito Mais Destacada e Bonitinha */
-        .track-notes-panel {
-            background: #fff5f8;
-            border: 2px dashed #e2aec7;
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 14px;
-            color: #8c4366;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05);
-            line-height: 1.5;
-        }
-
-        .note-highlight {
-            font-family: 'Georgia', serif;
-            font-size: 15px;
-            font-weight: bold;
-            font-style: italic;
-            display: block;
-            margin-top: 4px;
             color: #b85b88;
+        }
+
+        /* Caixinha de Comentários / Notas das Músicas */
+        .track-notes-panel {
+            background: white;
+            border: 1px solid #e2ebf0;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 13px;
+            color: #64748b;
+            text-align: center;
+            font-style: italic;
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.08);
         }
 
         /* Painel Inferior da Lista de Músicas */
@@ -319,7 +239,7 @@
             border: 1px solid #cbd5e1;
             border-radius: 14px;
             padding: 24px;
-            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.08);
+            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.15);
         }
 
         .tracklist-header {
@@ -360,7 +280,32 @@
         .track-number {
             width: 35px;
             color: #b85b88;
-Use o código com cuidado.
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .track-title {
+            flex-grow: 1;
+            padding-right: 15px;
+            font-weight: bold;
+        }
+
+        .track-artist {
+            color: #94a3b8;
+            text-align: right;
+        }
+
+        .track-item.active-track .track-artist {
+            color: #b85b88;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #64748b;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -377,7 +322,7 @@ Use o código com cuidado.
 
         <!-- O seu desenho com a moldura polaroid impecável e a tag certa -->
         <div class="art-cover-wrapper">
-            <img src="desenho.jpg" alt="Desenho feito à mão de Nick e Brilhos usando fones de ouvido" class="art-cover">
+            <img src="mixtape capa.jpg" alt="Desenho feito à mão de Nick e Brilhos usando fones de ouvido" class="art-cover">
             <div class="polaroid-label">For Brilhos ♡</div>
         </div>
         
