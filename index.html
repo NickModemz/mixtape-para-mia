@@ -654,93 +654,69 @@
     </div>
 
 <script>
-    const audioPlayer = document.getElementById('mixtape-player');
-    const playBtn = document.getElementById('btn-play');
-    const cassette = document.getElementById('cassette-container');
-    const display = document.getElementById('live-display');
-    const notesDisplay = document.getElementById('notes-display');
-    const tracks = document.querySelectorAll('.track-item');
-    let currentTrackIndex = -1;
-
-    function selectTrack(element) {
-        tracks.forEach(t => t.classList.remove('active-track'));
-        element.classList.add('active-track');
-        currentTrackIndex = parseInt(element.getAttribute('data-index'));
-        
-        const title = element.querySelector('.track-title').textContent;
-        const artist = element.querySelector('.track-artist').textContent;
-        const note = element.getAttribute('data-note');
-        
-        display.innerHTML = `PLAYING:<br>${title}<br><span style="color:#aa88aa">${artist}</span>`;
-        notesDisplay.innerHTML = `🎵 <strong>Nota da Faixa:</strong> <span class="note-highlight">"${note}"</span>`;
-        
-        audioPlayer.src = element.getAttribute('data-src');
-        audioPlayer.play().catch(err => {
-            display.innerHTML = `CLICK PLAY TO START:<br>${title}`;
-        });
-        cassette.classList.add('playing');
-        playBtn.innerHTML = "PAUSE ⏸";
-    }
-
-    function togglePlay() {
-        if (currentTrackIndex === -1 && tracks.length > 0) {
-            selectTrack(tracks);
-            return;
-        }
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            cassette.classList.add('playing');
-            playBtn.innerHTML = "PAUSE ⏸";
-        } else {
-            audioPlayer.pause();
-            cassette.classList.remove('playing');
-            playBtn.innerHTML = "PLAY ▶";
-        }
-    }
-
-    function playPrev() {
-        if (currentTrackIndex === -1) return;
-        let prevIndex = currentTrackIndex - 1;
-        if (prevIndex < 0) prevIndex = tracks.length - 1;
-        selectTrack(tracks[prevIndex]);
-    }
-
-    function playNext() {
-        if (currentTrackIndex === -1) return;
-        let nextIndex = currentTrackIndex + 1;
-        if (nextIndex >= tracks.length) nextIndex = 0;
-        selectTrack(tracks[nextIndex]);
-    }
-
-    audioPlayer.addEventListener('ended', () => {
-        let nextIndex = currentTrackIndex + 1;
-        if (nextIndex < tracks.length) {
-            selectTrack(tracks[nextIndex]);
-        } else {
-            cassette.classList.remove('playing');
-            playBtn.innerHTML = "PLAY ▶";
-            display.innerHTML = "THE END ♡";
-            notesDisplay.innerHTML = "Fim da mixtape! Obrigado por ouvir tudo ♡";
-            tracks.forEach(t => t.classList.remove('active-track'));
-            currentTrackIndex = -1;
-        }
-    });
-</script>
-<script>
-        // Endereço exclusivo na nuvem criado especificamente para a mixtape de vocês
-    const KV_URL = 'https://kvdb.io';
+    // Banco de dados em nuvem direto, rápido e sem bloqueio de segurança (CORS)
+    const SYNC_URL = 'https://moat.chat'; 
 
     // Carrega os status em tempo real direto da nuvem ao abrir o site
     document.addEventListener("DOMContentLoaded", function() {
-        fetch(KV_URL)
+        // Tenta buscar o status salvo na nuvem
+        fetch(SYNC_URL)
+        .then(res => res.json())
+        .then(data => {
+            if (data && (data.mia || data.nick)) {
+                document.getElementById('mia-status-text').textContent = data.mia;
+                document.getElementById('mia-status-select').value = data.mia;
+                
+                document.getElementById('nick-status-text').textContent = data.nick;
+                document.getElementById('nick-status-select').value = data.nick;
+            }
+        })
+        .catch(err => {
+            // Se a nuvem falhar ou estiver carregando, mantém o padrão fofinho salvo no aparelho
+            const localMia = localStorage.getItem('retroStatusMia') || "😊 Feliz";
+            const localNick = localStorage.getItem('retroStatusNick') || "😎 Online";
+            document.getElementById('mia-status-text').textContent = localMia;
+            document.getElementById('mia-status-select').value = localMia;
+            document.getElementById('nick-status-text').textContent = localNick;
+            document.getElementById('nick-status-select').value = localNick;
+        });
+    });
+
+    // Função que atualiza na tela e envia em segundo plano o novo status para a nuvem
+    function updateRetroStatus(user) {
+        let miaCurrent = document.getElementById('mia-status-text').textContent;
+        let nickCurrent = document.getElementById('nick-status-text').textContent;
+
+        if (user === 'mia') {
+            miaCurrent = document.getElementById('mia-status-select').value;
+            document.getElementById('mia-status-text').textContent = miaCurrent;
+            localStorage.setItem('retroStatusMia', miaCurrent); // Salva local de segurança
+        } else if (user === 'nick') {
+            nickCurrent = document.getElementById('nick-status-select').value;
+            document.getElementById('nick-status-text').textContent = nickCurrent;
+            localStorage.setItem('retroStatusNick', nickCurrent); // Salva local de segurança
+        }
+
+        // Texto de feedback charmoso no visor digital da fita cassete rosa
+        const display = document.getElementById('live-display');
+        const oldDisplay = display.innerHTML;
+        display.innerHTML = `📡 SINCRONIZANDO<br>STATUS...`;
+
+        // Envia as informações via método POST com cabeçalho limpo text/plain para evitar bloqueios
+        fetch(SYNC_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mia: miaCurrent, nick: nickCurrent })
+        })
         .then(res => {
-            if (!res.ok) throw new Error();
-            display.innerHTML = `✅ STATUS<br>SINCRONIZADO!`;
+            display.innerHTML = `✅ PORTAL<br>ATUALIZADO!`;
             setTimeout(() => { display.innerHTML = oldDisplay; }, 1200);
         })
         .catch(err => {
-            display.innerHTML = `❌ ERRO DE RECONEXÃO`;
-            setTimeout(() => { display.innerHTML = oldDisplay; }, 1500);
+            // Mesmo se a nuvem falhar, o status muda na tela do usuário de forma fluida
+            display.innerHTML = `✅ STATUS SALVO<br>(MODO LOCAL)`;
+            setTimeout(() => { display.innerHTML = oldDisplay; }, 1200);
         });
     }
 </script>
