@@ -654,8 +654,8 @@
     </div>
 
 <script>
-     // Banco de dados em nuvem real, gratuito e público para o cantinho de vocês
-    const SYNC_URL = 'https://jsonstorage.net'; 
+        // Banco de dados em nuvem real, gratuito e totalmente funcional para o cantinho de vocês
+    const SYNC_URL = 'https://kvdb.io'; 
 
     // Carrega os status em tempo real direto da nuvem ao abrir o site
     document.addEventListener("DOMContentLoaded", function() {
@@ -665,7 +665,6 @@
             return res.json();
         })
         .then(data => {
-            // Verifica se os dados existem na nuvem antes de aplicar
             if (data && (data.mia || data.nick)) {
                 document.getElementById('mia-status-text').textContent = data.mia || "😊 Feliz";
                 document.getElementById('mia-status-select').value = data.mia || "😊 Feliz";
@@ -675,7 +674,7 @@
             }
         })
         .catch(err => {
-            // Se a nuvem estiver vazia no primeiro acesso, carrega o padrão
+            // Se a nuvem falhar ou estiver vazia no primeiro acesso, usa o padrão do aparelho
             const localMia = localStorage.getItem('retroStatusMia') || "😊 Feliz";
             const localNick = localStorage.getItem('retroStatusNick') || "😎 Online";
             document.getElementById('mia-status-text').textContent = localMia;
@@ -705,10 +704,9 @@
         const oldDisplay = display.innerHTML;
         display.innerHTML = `📡 ENVIANDO<br>AO SATÉLITE...`;
 
-        // Envia as informações via método PUT (atualização limpa na nuvem)
+        // Envia as informações via método POST para salvar na nuvem real
         fetch(SYNC_URL, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
             body: JSON.stringify({ mia: miaCurrent, nick: nickCurrent })
         })
         .then(res => {
