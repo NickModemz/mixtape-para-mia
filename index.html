@@ -188,12 +188,17 @@
         }
         .art-cover {
             width: 100%;
-            max-width: 280px; /* 💡 Define o tamanho máximo perfeito para não esticar no PC */
+            max-width: 280px;
             height: auto;
             display: block;
-            margin: 0 auto; /* 💡 Centraliza a imagem perfeitamente dentro da moldura */
-            border: 1px solid #f0f0f0;
-            border-radius: 4px;
+            margin: 0 auto;
+            /* Borda dupla clássica dos anos 2000 (pixel art style) */
+            border: 4px double #b85b88;
+            padding: 4px;
+            background-color: #ffffff;
+            /* Sombra sólida sem desfoque (estilo interface de sistema antigo) */
+            box-shadow: 4px 4px 0px rgba(184, 91, 136, 0.2);
+            border-radius: 2px;
         }
         .polaroid-label {
             position: absolute;
