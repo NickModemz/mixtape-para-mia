@@ -24,7 +24,7 @@
             gap: 20px;
         }
 
-        /* Painel Superior do Player (Idêntico ao do print) */
+        /* Painel Superior do Player */
         .player-panel {
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
@@ -116,7 +116,7 @@
             justify-content: space-between;
             padding: 10px;
             box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.2); /* Escurece sutilmente para dar leitura */
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .wheels-container {
@@ -197,7 +197,7 @@
             box-shadow: 0 4px 12px rgba(148, 163, 184, 0.08);
         }
 
-        /* Painel Inferior da Lista de Músicas (Idêntico ao do print) */
+        /* Painel Inferior da Lista de Músicas */
         .tracklist-panel {
             background: white;
             border: 1px solid #cbd5e1;
@@ -276,15 +276,13 @@
 
     <div class="container">
         
-        <!-- Elemento invisível que gerencia o áudio -->
         <audio id="mixtape-player" preload="auto"></audio>
 
-        <!-- Painel Superior (Cinza/Arredondado) -->
         <div class="player-panel">
             <div class="cassette-player" id="cassette-container">
                 <div class="stereo-mix-header">
                     <span>STEREO MIX · 2000</span>
-                    <span>NO. 008 ♡</span>
+                    <span>NO. 009 ♡</span>
                 </div>
 
                 <div class="cassette-label">
@@ -292,7 +290,6 @@
                     <div class="label-subtitle">SIDE A · A MIXTAPE FOR MIA</div>
                 </div>
 
-                <!-- Visor da fita contendo seu desenho e as bobinas por cima -->
                 <div class="cassette-center">
                     <img src="mixtape capa.jpg" alt="Capa" class="bg-drawing">
                     <div class="cassette-overlay">
@@ -315,12 +312,10 @@
             </div>
         </div>
 
-        <!-- Caixinha Interativa de Notas das Músicas -->
         <div class="track-notes-panel" id="notes-display">
             Escolha uma música abaixo para ver o detalhe especial dela...
         </div>
 
-        <!-- Painel Inferior (Branco/Arredondado) da Tracklist -->
         <div class="tracklist-panel">
             <div class="tracklist-header">
                 <span>Track list ♫</span>
@@ -366,6 +361,12 @@
                     <span class="track-number">08</span>
                     <span class="track-title">The Spins</span>
                     <span class="track-artist">Mac Miller, Empire of the Sun</span>
+                </div>
+                <!-- Nova Faixa Adicionada com Sucesso -->
+                <div class="track-item" data-index="8" data-src="musicas/09.mp3" data-note="Mais uma música incrível do Deftones para completar o nosso set" onclick="selectTrack(this)">
+                    <span class="track-number">09</span>
+                    <span class="track-title">I think about you all the time</span>
+                    <span class="track-artist">Deftones</span>
                 </div>
             </div>
             
