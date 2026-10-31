@@ -485,7 +485,14 @@
         </div>
         
         <audio id="mixtape-player" preload="auto"></audio>
-
+            <!-- Seletor de Mixtapes / Álbuns -->
+            <div class="tape-selector-panel">
+                <div class="tape-selector-title">📼 Escolha a Fita para Tocar:</div>
+                <div class="tape-tabs">
+                    <button class="tape-tab-btn active-tape" onclick="switchCassette('mixtape', this)">MIX 008 (Rosa)</button>
+                    <button class="tape-tab-btn" onclick="switchCassette('deftones', this)">DEFTONES ALBUM (Azul)</button>
+                </div>
+            </div>
         <!-- Painel do Player Arredondado -->
         <div class="player-panel">
             <div class="cassette-player" id="cassette-container">
