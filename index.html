@@ -11,304 +11,317 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 20px;
-            color: #2c3e50;
+            padding: 30px 15px;
+            color: #334155;
             margin: 0;
         }
-        .header-link {
-            font-size: 13px;
-            color: #5a738e;
-            text-decoration: none;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-        .header-title {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #7f8c8d;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
+
         .container {
             width: 100%;
-            max-width: 500px;
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(160, 190, 220, 0.3);
-            border: 1px solid #e2ebf0;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        .main-title {
-            font-family: 'Georgia', serif;
-            font-size: 32px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 0 0 4px 0;
-            text-align: center;
+
+        /* Painel Superior do Player (Idêntico ao do print) */
+        .player-panel {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.25);
         }
-        .subtitle {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin: 0 0 25px 0;
-            text-align: center;
-            font-weight: bold;
-        }
-        /* Visual Polaroid Fiel ao Original */
-        .art-cover-wrapper {
-            background: white;
-            padding: 16px 16px 24px 16px;
-            border-radius: 4px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-            border: 1px solid #eef2f5;
-            margin-bottom: 30px;
-        }
-        .art-cover {
-            width: 100%;
-            height: auto;
-            border-radius: 2px;
-            display: block;
-        }
-        /* Deck da Fita Cassete Polido */
+
+        /* Corpo da Fita Cassete Rosa */
         .cassette-player {
             background-color: #f7d1e3;
-            border: 3px solid #e2aec7;
-            border-radius: 16px;
-            padding: 22px;
-            text-align: center;
+            border: 2px solid #e2aec7;
+            border-radius: 14px;
+            padding: 16px;
             position: relative;
-            box-shadow: inset 0 0 12px rgba(0,0,0,0.06), 0 4px 12px rgba(226,174,199,0.3);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
         }
+
         .stereo-mix-header {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 2px;
             color: #b3839b;
             display: flex;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
+
         .cassette-label {
             background: white;
-            border: 2px dashed #e2aec7;
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 18px;
+            border: 1px dashed #e2aec7;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            text-align: center;
         }
+
         .label-title {
             font-family: 'Georgia', serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #b85b88;
-            letter-spacing: 1px;
+            font-style: italic;
         }
+
         .label-subtitle {
-            font-size: 10px;
-            color: #8e8e8e;
-            letter-spacing: 2px;
-            margin-top: 4px;
+            font-size: 9px;
+            color: #94a3b8;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
             text-transform: uppercase;
-            font-weight: bold;
         }
+
+        /* Área Central onde as bobinas ficam sobre o seu desenho */
         .cassette-center {
             background: #1e1e1e;
-            height: 110px;
+            height: 240px;
             border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
             position: relative;
             overflow: hidden;
-            border: 2px solid #111;
+            border: 2px solid #0f172a;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
+
+        /* O seu desenho esticado perfeitamente no fundo do visor */
+        .bg-drawing {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        /* Camada superior para as bobinas e textos flutuarem sobre o desenho */
+        .cassette-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.2); /* Escurece sutilmente para dar leitura */
+        }
+
+        .wheels-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 10px;
+        }
+
         .wheel {
-            width: 46px;
-            height: 46px;
-            border: 4px dashed #444;
+            width: 36px;
+            height: 36px;
+            border: 4px dashed rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-            opacity: 0.7;
         }
+
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
         .playing .wheel {
             border-color: #00ff66;
-            animation: spin 3.5s linear infinite;
+            animation: spin 4s linear infinite;
         }
+
         .current-track-info {
-            position: absolute;
-            width: 85%;
             color: #00ff66;
             font-family: monospace;
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
-            pointer-events: none;
             letter-spacing: 0.5px;
-            line-height: 1.4;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px;
+            border-radius: 4px;
+            margin-bottom: 5px;
             font-weight: bold;
+            border: 1px solid #334155;
         }
-        .controls {
-            margin-top: 18px;
+
+        /* Rodapé de comandos da fita */
+        .cassette-footer {
+            margin-top: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
+            font-size: 10px;
             color: #b3839b;
             font-weight: bold;
-            padding: 0 5px;
         }
-        .control-actions {
-            display: flex;
-            gap: 15px;
-        }
-        .controls button {
-            background: #fff;
-            border: 1px solid #e2aec7;
-            border-radius: 6px;
+
+        .control-actions button {
+            background: none;
+            border: none;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
-            color: #b85b88;
+            color: #b3839b;
             font-weight: bold;
-            padding: 5px 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-            transition: all 0.2s;
+            padding: 2px 6px;
+            text-transform: uppercase;
         }
-        .controls button:hover {
-            background: #fff0f5;
+
+        .control-actions button:hover {
             color: #b85b88;
-            transform: translateY(-1px);
         }
-        /* Nova Caixinha de Dedicatórias do Nick */
-        .track-notes-box {
-            margin-top: 20px;
-            background: #fdf6f9;
-            border: 1px solid #f2d1e1;
-            border-radius: 10px;
-            padding: 15px;
+
+        /* Caixinha de Comentários / Notas das Músicas */
+        .track-notes-panel {
+            background: white;
+            border: 1px solid #e2ebf0;
+            border-radius: 12px;
+            padding: 14px;
             font-size: 13px;
-            color: #7d4461;
-            line-height: 1.5;
+            color: #64748b;
             text-align: center;
             font-style: italic;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 2px 4px rgba(242,209,225,0.2);
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.08);
         }
-        .tracklist-container {
-            margin-top: 35px;
+
+        /* Painel Inferior da Lista de Músicas (Idêntico ao do print) */
+        .tracklist-panel {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.15);
         }
+
         .tracklist-header {
             display: flex;
             justify-content: space-between;
-            font-size: 13px;
-            border-bottom: 2px dashed #cbd5e1;
-            padding-bottom: 10px;
-            color: #334155;
+            font-size: 14px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 12px;
+            color: #1e293b;
             font-weight: bold;
         }
+
         .track-item {
             display: flex;
-            padding: 16px 8px;
+            padding: 14px 4px;
             border-bottom: 1px solid #f1f5f9;
             cursor: pointer;
-            transition: background 0.2s, cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 14px;
+            transition: all 0.15s ease;
+            font-size: 13px;
             color: #334155;
             align-items: center;
-            border-radius: 6px;
         }
+
         .track-item:hover {
-            background-color: #fff5f8;
+            background-color: #fff1f6;
             color: #b85b88;
+            padding-left: 8px;
         }
+
         .track-item.active-track {
             background-color: #ffeef4;
             font-weight: bold;
             color: #b85b88;
+            border-radius: 4px;
+            padding-left: 8px;
         }
+
         .track-number {
-            width: 40px;
+            width: 35px;
             color: #b85b88;
             font-weight: bold;
+            font-size: 11px;
         }
+
         .track-title {
             flex-grow: 1;
             padding-right: 15px;
-            font-weight: 600;
+            font-weight: bold;
         }
+
         .track-artist {
-            color: #64748b;
+            color: #94a3b8;
             text-align: right;
-            font-size: 13px;
         }
+
         .track-item.active-track .track-artist {
             color: #b85b88;
         }
+
         .footer-note {
             text-align: center;
-            margin-top: 35px;
-            font-size: 12px;
-            color: #94a3b8;
-            font-weight: bold;
-        }
-        .footer-thanks {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 12px;
+            margin-top: 20px;
+            font-size: 13px;
             color: #64748b;
-            letter-spacing: 1.5px;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <a href="#" class="header-link">http://brilhos-fm.jp</a>
-    <div class="header-title">音楽の小さな贈り物 · MUSIC GIFT</div>
-    <div class="container">
-        <h1 class="main-title">Mixtape para Mia</h1>
-        <div class="subtitle">for Brilhos ♡</div>
-        
-        <div class="art-cover-wrapper">
-            <img src="desenho.jpg" alt="Desenho feito à mão de Nick e Brilhos usando fones de ouvido" class="art-cover">
-        </div>
 
+    <div class="container">
+        
+        <!-- Elemento invisível que gerencia o áudio -->
         <audio id="mixtape-player" preload="auto"></audio>
 
-        <div class="cassette-player" id="cassette-container">
-            <div class="stereo-mix-header">
-                <span>STEREO MIX · 2000</span>
-                <span>NO. 008 ♡</span>
-            </div>
-            <div class="cassette-label">
-                <div class="label-title">For Brilhos</div>
-                <div class="label-subtitle">SIDE A · A MIXTAPE FOR MIA</div>
-            </div>
-            <div class="cassette-center">
-                <div class="wheel"></div>
-                <div class="current-track-info" id="live-display">CHOOSE A TRACK<br>TO START THE TAPE</div>
-                <div class="wheel"></div>
-            </div>
-            <div class="controls">
-                <div class="control-actions">
-                    <button id="btn-play" onclick="togglePlay()">PLAY ▶</button>
-                    <button id="btn-prev" onclick="playPrev()">REW ◀◀</button>
-                    <button id="btn-next" onclick="playNext()">NEXT ⏭</button>
+        <!-- Painel Superior (Cinza/Arredondado) -->
+        <div class="player-panel">
+            <div class="cassette-player" id="cassette-container">
+                <div class="stereo-mix-header">
+                    <span>STEREO MIX · 2000</span>
+                    <span>NO. 008 ♡</span>
                 </div>
-                <span>♡ NICK</span>
+
+                <div class="cassette-label">
+                    <div class="label-title">For Brilhos</div>
+                    <div class="label-subtitle">SIDE A · A MIXTAPE FOR MIA</div>
+                </div>
+
+                <!-- Visor da fita contendo seu desenho e as bobinas por cima -->
+                <div class="cassette-center">
+                    <img src="mixtape capa.jpg" alt="Capa" class="bg-drawing">
+                    <div class="cassette-overlay">
+                        <div class="wheels-container">
+                            <div class="wheel"></div>
+                            <div class="wheel"></div>
+                        </div>
+                        <div class="current-track-info" id="live-display">CHOOSE A TRACK TO START</div>
+                    </div>
+                </div>
+
+                <div class="cassette-footer">
+                    <div class="control-actions">
+                        <button id="btn-play" onclick="togglePlay()">PLAY ▶</button>
+                        <button id="btn-prev" onclick="playPrev()">REW ◀◀</button>
+                        <button id="btn-next" onclick="playNext()">NEXT ⏭</button>
+                    </div>
+                    <span>Layout por ♡ NICK</span>
+                </div>
             </div>
         </div>
 
-        <!-- Caixinha de Mensagens Dinâmicas -->
-        <div class="track-notes-box" id="notes-display">
-            Escolha uma faixa na lista abaixo para ler os detalhes da fita.
+        <!-- Caixinha Interativa de Notas das Músicas -->
+        <div class="track-notes-panel" id="notes-display">
+            Escolha uma música abaixo para ver o detalhe especial dela...
         </div>
 
-        <div class="tracklist-container">
+        <!-- Painel Inferior (Branco/Arredondado) da Tracklist -->
+        <div class="tracklist-panel">
             <div class="tracklist-header">
                 <span>Track list ♫</span>
                 <span>THE BACK OF THE TAPE</span>
@@ -331,7 +344,7 @@
                 </div>
                 <div class="track-item" data-index="3" data-src="musicas/04.mp3" data-note="Uma descoberta que eu quero compartilhar" onclick="selectTrack(this)">
                     <span class="track-number">04</span>
-                    <span class="track-title">dl++ (Delatetel) — Sadesper Record Mix</span>
+                    <span class="track-title">dltt (Delatete) — Sadesper Record...</span>
                     <span class="track-artist">Coaltar Of The Deepers</span>
                 </div>
                 <div class="track-item" data-index="4" data-src="musicas/05.mp3" data-note="Uma música que nós gostamos" onclick="selectTrack(this)">
@@ -355,10 +368,11 @@
                     <span class="track-artist">Mac Miller, Empire of the Sun</span>
                 </div>
             </div>
+            
+            <div class="footer-note">Mia bobona ♡</div>
         </div>
-        <div class="footer-note">Mia bobona ♡</div>
     </div>
-    <div class="footer-thanks">THANK YOU FOR LISTENING · またね!</div>
+
 <script>
     const audioPlayer = document.getElementById('mixtape-player');
     const playBtn = document.getElementById('btn-play');
@@ -377,12 +391,12 @@
         const artist = element.querySelector('.track-artist').textContent;
         const note = element.getAttribute('data-note');
         
-        display.innerHTML = `PLAYING:<br>${title}<br><span style="color:#aa88aa">${artist}</span>`;
-        notesDisplay.innerHTML = `ℹ️ <strong>Nota da faixa:</strong> "${note}"`;
+        display.innerHTML = `PLAYING: ${title} - ${artist}`;
+        notesDisplay.innerHTML = `💌 <strong>Nota:</strong> "${note}"`;
         
         audioPlayer.src = element.getAttribute('data-src');
         audioPlayer.play().catch(err => {
-            display.innerHTML = `CLICK PLAY TO START:<br>${title}`;
+            display.innerHTML = `CLICK PLAY TO START: ${title}`;
         });
         cassette.classList.add('playing');
         playBtn.textContent = "PAUSE ⏸";
@@ -425,8 +439,8 @@
         } else {
             cassette.classList.remove('playing');
             playBtn.textContent = "PLAY ▶";
-            display.innerHTML = "THE END ♡<br>THANK YOU FOR LISTENING";
-            notesDisplay.innerHTML = "Fim da fita! Obrigado por escutar tudo ♡";
+            display.innerHTML = "THE END ♡";
+            notesDisplay.innerHTML = "Fim da mixtape! Obrigado por ouvir tudo ♡";
             tracks.forEach(t => t.classList.remove('active-track'));
             currentTrackIndex = -1;
         }
