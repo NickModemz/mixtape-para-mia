@@ -7,38 +7,89 @@
     <style>
         body {
             background-color: #d2e4f0;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px);
+            background-size: 20px 20px;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 15px;
+            padding: 0;
             color: #334155;
             margin: 0;
         }
 
-        /* O cabeçalho clássico que havia sumido */
-        .header-link {
-            font-size: 13px;
-            color: #5a738e;
-            text-decoration: none;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-        .header-title {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #7f8c8d;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            font-weight: bold;
+        .browser-window {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-left: 1px solid #b4c6d4;
+            border-right: 1px solid #b4c6d4;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            min-height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0 40px 0;
         }
 
-        .container {
+        .browser-top-bar {
+            width: 100%;
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-sizing: border-box;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+        .dot.red { background: #fc8181; }
+        .dot.yellow { background: #f6e05e; }
+        .dot.green { background: #68d391; }
+
+        .browser-address {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: #64748b;
+            flex-grow: 1;
+            max-width: 320px;
+        }
+
+        .page-content-wrapper {
             width: 100%;
             max-width: 480px;
+            padding: 30px 15px 0 15px;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             gap: 20px;
+        }
+
+        .header-title-jap {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #7f8c8d;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         /* Títulos originais do topo do painel */
@@ -318,7 +369,7 @@
         
         <!-- Bloco de títulos da página -->
         <h1 class="main-title">Mixtape para Mia</h1>
-        <div class="subtitle">for Brilhos ♡</div>
+        <div class="subtitle">minha querida (melhor) amiga ♡</div>
 
         <!-- O seu desenho com a moldura polaroid impecável e a tag certa -->
         <div class="art-cover-wrapper">
