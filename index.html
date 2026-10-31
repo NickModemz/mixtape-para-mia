@@ -677,10 +677,6 @@
         playlistDiv.innerHTML = '';
         currentTape = tapeKey;
         
-        // Atualiza a imagem de capa e os textos da etiqueta
-        const coverEl = document.querySelector('.art-cover');
-        if (coverEl) coverEl.src = tapeLibrary[tapeKey].coverImg;
-        
         const labelTitleEl = document.querySelector('.label-title');
         if (labelTitleEl) labelTitleEl.textContent = tapeLibrary[tapeKey].title;
         
