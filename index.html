@@ -654,25 +654,28 @@
     </div>
 
 <script>
-    // Banco de dados em nuvem direto, rápido e sem bloqueio de segurança (CORS)
-    const SYNC_URL = 'https://moat.chat'; 
+     // Banco de dados em nuvem real, gratuito e público para o cantinho de vocês
+    const SYNC_URL = 'https://jsonstorage.net'; 
 
     // Carrega os status em tempo real direto da nuvem ao abrir o site
     document.addEventListener("DOMContentLoaded", function() {
-        // Tenta buscar o status salvo na nuvem
         fetch(SYNC_URL)
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) throw new Error();
+            return res.json();
+        })
         .then(data => {
+            // Verifica se os dados existem na nuvem antes de aplicar
             if (data && (data.mia || data.nick)) {
-                document.getElementById('mia-status-text').textContent = data.mia;
-                document.getElementById('mia-status-select').value = data.mia;
+                document.getElementById('mia-status-text').textContent = data.mia || "😊 Feliz";
+                document.getElementById('mia-status-select').value = data.mia || "😊 Feliz";
                 
-                document.getElementById('nick-status-text').textContent = data.nick;
-                document.getElementById('nick-status-select').value = data.nick;
+                document.getElementById('nick-status-text').textContent = data.nick || "😎 Online";
+                document.getElementById('nick-status-select').value = data.nick || "😎 Online";
             }
         })
         .catch(err => {
-            // Se a nuvem falhar ou estiver carregando, mantém o padrão fofinho salvo no aparelho
+            // Se a nuvem estiver vazia no primeiro acesso, carrega o padrão
             const localMia = localStorage.getItem('retroStatusMia') || "😊 Feliz";
             const localNick = localStorage.getItem('retroStatusNick') || "😎 Online";
             document.getElementById('mia-status-text').textContent = localMia;
@@ -682,7 +685,7 @@
         });
     });
 
-    // Função que atualiza na tela e envia em segundo plano o novo status para a nuvem
+    // Função que atualiza na tela e envia para a nuvem o novo status
     function updateRetroStatus(user) {
         let miaCurrent = document.getElementById('mia-status-text').textContent;
         let nickCurrent = document.getElementById('nick-status-text').textContent;
@@ -690,33 +693,32 @@
         if (user === 'mia') {
             miaCurrent = document.getElementById('mia-status-select').value;
             document.getElementById('mia-status-text').textContent = miaCurrent;
-            localStorage.setItem('retroStatusMia', miaCurrent); // Salva local de segurança
+            localStorage.setItem('retroStatusMia', miaCurrent);
         } else if (user === 'nick') {
             nickCurrent = document.getElementById('nick-status-select').value;
             document.getElementById('nick-status-text').textContent = nickCurrent;
-            localStorage.setItem('retroStatusNick', nickCurrent); // Salva local de segurança
+            localStorage.setItem('retroStatusNick', nickCurrent);
         }
 
-        // Texto de feedback charmoso no visor digital da fita cassete rosa
+        // Mensagem charmosa no visor digital da fita cassete rosa
         const display = document.getElementById('live-display');
         const oldDisplay = display.innerHTML;
-        display.innerHTML = `📡 SINCRONIZANDO<br>STATUS...`;
+        display.innerHTML = `📡 ENVIANDO<br>AO SATÉLITE...`;
 
-        // Envia as informações via método POST com cabeçalho limpo text/plain para evitar bloqueios
+        // Envia as informações via método PUT (atualização limpa na nuvem)
         fetch(SYNC_URL, {
-            method: 'POST',
-            mode: 'cors',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ mia: miaCurrent, nick: nickCurrent })
         })
         .then(res => {
-            display.innerHTML = `✅ PORTAL<br>ATUALIZADO!`;
+            if (!res.ok) throw new Error();
+            display.innerHTML = `✅ PORTAL<br>SINCRONIZADO!`;
             setTimeout(() => { display.innerHTML = oldDisplay; }, 1200);
         })
         .catch(err => {
-            // Mesmo se a nuvem falhar, o status muda na tela do usuário de forma fluida
-            display.innerHTML = `✅ STATUS SALVO<br>(MODO LOCAL)`;
-            setTimeout(() => { display.innerHTML = oldDisplay; }, 1200);
+            display.innerHTML = `❌ ERRO DE CONEXÃO`;
+            setTimeout(() => { display.innerHTML = oldDisplay; }, 1500);
         });
     }
 </script>
