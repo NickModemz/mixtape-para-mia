@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivo Musical: Mia & Nicolas ♡</title>
+    <style>
+        body {
+            background-color: #d2e4f0;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            color: #334155;
+            margin: 0;
+        }
+
+        .browser-window {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-left: 1px solid #b4c6d4;
+            border-right: 1px solid #b4c6d4;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            min-height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0 40px 0;
+        }
+
+        .browser-top-bar {
+            width: 100%;
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-sizing: border-box;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+        .dot.red { background: #fc8181; }
+        .dot.yellow { background: #f6e05e; }
+        .dot.green { background: #68d391; }
+
+        .browser-address {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: #64748b;
+            flex-grow: 1;
+            max-width: 320px;
+        }
+
+        .page-content-wrapper {
+            width: 100%;
+            max-width: 480px;
+            padding: 30px 15px 0 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header-title-jap {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #7f8c8d;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Títulos originais do topo do painel */
+        .main-title {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 4px 0;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Moldura Polaroid Polida para o seu Desenho */
+        .art-cover-wrapper {
+            background: white;
+            padding: 16px 16px 60px 16px;
+            border-radius: 4px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            border: 1px solid #eef2f5;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        .art-cover {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            display: block;
+            border: 1px solid #f0f0f0;
+        }
+        .polaroid-label {
+            position: absolute;
+            bottom: 16px;
+            right: 18px;
+            background-color: white;
+            border: 1px solid #e2aec7;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 13px;
+            font-weight: bold;
+            color: #b85b88;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.03);
+            font-style: italic;
+        }
+        /* MENU RETRÔ DE SELEÇÃO DE FITAS */
+        .tape-selector-panel {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 12px;
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.08);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .tape-selector-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .tape-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .tape-tab-btn {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            font-weight: bold;
+            color: #64748b;
+            cursor: pointer;
+            padding: 6px 12px;
+            box-shadow: 0 3px 0px #cbd5e1;
+            transition: all 0.1s;
+            white-space: nowrap;
+        }
+        .tape-tab-btn.active-tape {
+            background: #fff0f5;
+            border-color: #b85b88;
+            color: #b85b88;
+            box-shadow: 0 1px 0px #cbd5e1;
+        }
+
+        /* Classes para mudar a cor da fita dinamicamente */
+        .cassette-player.tape-pink { background-color: #f7d1e3; border-color: #e2aec7; }
+        .cassette-player.tape-blue { background-color: #d6e4f0; border-color: #a3c2dc; }
+        
+        /* Botão de Download na lista de músicas */
+        .download-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 6px;
+            color: #94a3b8;
+            transition: transform 0.1s;
+        }
+        .download-icon:hover { transform: scale(1.2); color: #b85b88; }
+                /* BIBLIOTECA DE ALBUNS EM LISTA RETRÔ */
+        .library-panel {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.08);
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .library-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 6px;
+        }
+        .library-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .library-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.15s ease;
+        }
+        .library-item:hover {
+            background: #fff5f8;
+            border-color: #e2aec7;
+            color: #b85b88;
+            padding-left: 16px;
+        }
+        .library-item.active-tape-item {
+            background: #ffeef4;
+            border-color: #b85b88;
+            color: #b85b88;
+        }
+
+        /* Biblioteca de cores para as fitas cassete */
+        .cassette-player.tape-pink { background-color: #f7d1e3; border-color: #e2aec7; }
+        .cassette-player.tape-blue { background-color: #d6e4f0; border-color: #a3c2dc; }
+        .cassette-player.tape-purple { background-color: #e9d5ff; border-color: #c084fc; }
+        .cassette-player.tape-green { background-color: #d1fae5; border-color: #34d399; }
+        
+        .download-icon {
+            background: none; border: none; cursor: pointer;
+            font-size: 14px; padding: 0 4px; color: #94a3b8; text-decoration: none;
+        }
+        .download-icon:hover { color: #b85b88; transform: scale(1.1); }
+        .player-panel {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.25);
+        }
+
+        /* Corpo da Fita Cassete Rosa */
+        .cassette-player {
+            background-color: #f7d1e3;
+            border: 2px solid #e2aec7;
+            border-radius: 14px;
+            padding: 16px;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+        }
+        .art-cover-wrapper::after {
+            content: "✍️ Nota do Autor:\A Gosto bastante de voce e quis fazer esse presente :) Obrigado por ser essa pessoa engraçada com ótimo gosto musical que você é (só tenho raiva quando inventa coisas sobre mim)! Amo voce bobona!!!! - Nick";
+            white-space: pre-wrap;
+            display: block;
+            margin-top: 15px;
+            background: #fffdf5;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #334155;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+            text-align: left;
+        }
+        .stereo-mix-header {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #b3839b;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .cassette-label {
+            background: white;
+            border: 1px dashed #e2aec7;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .label-title {
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #b85b88;
+            font-style: italic;
+        }
+
+        .label-subtitle {
+            font-size: 9px;
+            color: #94a3b8;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Visor Interno Escuro Clássico da Fita */
+        .cassette-center {
+            background: #1e1e1e;
+            height: 110px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #0f172a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wheels-container {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            margin-bottom: 12px;
+        }
+
+        .wheel {
+            width: 38px;
+            height: 38px;
+            border: 4px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .playing .wheel {
+            border-color: #00ff66;
+            animation: spin 4s linear infinite;
+        }
+
+        .current-track-info {
+            color: #00ff66;
+            font-family: monospace;
+            font-size: 11px;
+            text-align: center;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        /* Rodapé de comandos da fita */
+        /* Botões Maiores e Evidentes Estilo Equipamento Retrô */
+        .cassette-footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .layout-signature {
+            font-size: 10px;
+            color: #b3839b;
+            font-weight: bold;
+        }
+
+        .control-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-actions button {
+            background: #ffffff;
+            border: 2px solid #b85b88;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: #b85b88;
+            cursor: pointer;
+            padding: 8px 14px;
+            box-shadow: 0 4px 0px #943d66; /* Efeito 3D clássico */
+            transition: all 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .control-actions button:hover {
+            background: #fff0f5;
+            transform: translateY(1px);
+            box-shadow: 0 3px 0px #943d66;
+        }
+
+        .control-actions button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0px #943d66; /* Botão totalmente afundado */
+        }
+
+        /* Caixa de Notas Muito Mais Destacada e Bonitinha */
+        .track-notes-panel {
+            background: #fff5f8;
+            border: 2px dashed #e2aec7;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 14px;
+            color: #8c4366;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05);
+            line-height: 1.5;
+        }
+
+        .note-highlight {
+            font-family: 'Georgia', serif;
+            font-size: 15px;
+            font-weight: bold;
+            font-style: italic;
+            display: block;
+            margin-top: 4px;
+            color: #b85b88;
+        }
+
+        /* Painel Inferior da Lista de Músicas */
+        .tracklist-panel {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.08);
+        }
+
+
+        .tracklist-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 12px;
+            color: #1e293b;
+            font-weight: bold;
+        }
+
+        .track-item {
+            display: flex;
+            padding: 14px 4px;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-size: 13px;
+            color: #334155;
+            align-items: center;
+        }
+
+        .track-item:hover {
+            background-color: #fff1f6;
+            color: #b85b88;
+            padding-left: 8px;
+        }
+
+        .track-item.active-track {
+            background-color: #ffeef4;
+            font-weight: bold;
+            color: #b85b88;
+            border-radius: 4px;
+            padding-left: 8px;
+        }
+
+        .track-number {
+            width: 35px;
+            color: #b85b88;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .track-title {
+            flex-grow: 1;
+            padding-right: 15px;
+            font-weight: bold;
+        }
+
+        .track-artist {
+            color: #94a3b8;
+            text-align: right;
+        }
+
+        .track-item.active-track .track-artist {
+            color: #b85b88;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #64748b;
+            font-weight: bold;
+        }
+    </style>
+
+<style>
+/* Ajustes delicados: mantém a identidade original e arredonda os componentes. */
+body { padding-bottom: 112px; background-color:#dcebf4; }
+.container {
+    width: min(100% - 28px, 560px);
+    margin: 0 auto 28px;
+    padding: 24px 18px 30px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,.88);
+    border: 1px solid #d5e2ec;
+    border-radius: 0 0 28px 28px;
+    box-shadow: 0 10px 30px rgba(96,125,150,.10);
+}
+.header-link {
+    display:block; width:min(100% - 28px,560px); box-sizing:border-box;
+    margin:16px auto 0; padding:8px 14px; border:1px solid #d5e2ec;
+    border-radius:14px 14px 0 0; background:#f7fbff; color:#8ba3b8;
+    font-size:11px; text-decoration:none;
+}
+.header-title { text-align:center; color:#8ba3b8; font-size:10px; letter-spacing:2px; padding:8px; }
+.main-title { font-size:clamp(26px,7vw,34px); }
+.art-cover-wrapper { border-radius:15px; padding:12px 12px 54px; }
+.art-cover { border-radius:9px; }
+.library-panel,.player-panel,.tracklist-panel,.track-notes-panel,.tape-selector-panel {
+    border-radius:20px;
+}
+.library-panel { padding:16px; }
+.library-item { width:100%; text-align:left; font: bold 12px 'Courier New',monospace; }
+.library-item, .favorite-row { border-radius:13px; }
+.track-item { gap:8px; border-radius:10px; }
+.track-left { display:flex; align-items:center; min-width:0; flex:1; }
+.track-title { overflow-wrap:anywhere; }
+.track-right { display:flex; align-items:center; gap:7px; }
+.track-favorite,.mini-heart {
+    border:0; background:transparent; color:#b6a0b0; cursor:pointer;
+    font-size:19px; padding:3px 5px; line-height:1;
+}
+.track-favorite.is-favorite,.mini-heart.is-favorite { color:#d45f91; }
+.library-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:-8px 2px 2px; }
+.library-actions button {
+    border:1px solid #e5bfd0; border-radius:999px; background:#fff7fa;
+    color:#ad6386; padding:9px 14px; font: bold 10px 'Courier New',monospace;
+    letter-spacing:.5px; cursor:pointer;
+}
+.library-actions span { color:#9aabba; font-size:10px; }
+.favorites-panel {
+    display:none; padding:14px; border:1px dashed #e4bfd0; border-radius:18px;
+    background:#fff9fc; margin-top:-8px;
+}
+.favorites-panel.favorites-open { display:block; }
+.favorites-heading { color:#b36d8d; font-size:11px; font-weight:bold; letter-spacing:1px; margin-bottom:9px; }
+.favorite-row {
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    width:100%; border:1px solid #f0dce6; background:white; padding:10px 12px;
+    margin:6px 0; color:#566779; text-align:left; cursor:pointer;
+    font:12px 'Courier New',monospace;
+}
+.favorite-info { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.favorite-info small { color:#a2afbd; font-size:10px; }
+.favorite-remove { color:#d45f91; }
+.favorites-empty { color:#91a0ae; font-size:11px; line-height:1.6; }
+.mini-player {
+    position:fixed; z-index:999; left:0; right:0; bottom:0;
+    padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+    background:rgba(247,251,255,.96); border-top:1px solid #cbdde9;
+    box-shadow:0 -5px 22px rgba(86,116,145,.12); backdrop-filter:blur(10px);
+}
+.mini-player-inner {
+    width:min(100%,560px); margin:0 auto; display:flex; align-items:center; gap:10px;
+}
+.mini-player-record {
+    width:38px; height:38px; flex:0 0 38px; border-radius:12px;
+    display:grid; place-items:center; background:#f4d8e6; color:#ad6386;
+    border:1px solid #e7bfd1; font-size:20px;
+}
+.mini-player-meta { display:flex; flex-direction:column; min-width:0; flex:1; gap:2px; }
+#mini-player-state { color:#a2adba; font-size:8px; letter-spacing:1px; }
+#mini-track-title { color:#475569; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#mini-track-artist { color:#9aa8b6; font-size:9px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mini-controls { display:flex; align-items:center; gap:4px; }
+.mini-controls button {
+    width:32px; height:32px; border:1px solid #e5bfd0; border-radius:11px;
+    background:#fff; color:#ad6386; font-size:11px; cursor:pointer;
+}
+.mini-controls #mini-play { background:#f9e5ee; font-size:14px; }
+.mini-heart { font-size:20px; }
+@media (max-width:420px) {
+    .container { width:100%; padding:20px 13px 26px; border-radius:0 0 22px 22px; }
+    .mini-player-inner { gap:6px; }
+    .mini-player-record { width:32px; height:32px; flex-basis:32px; }
+    .mini-controls button { width:29px; height:30px; }
+    .tracklist-panel { padding:16px 12px; }
+    .track-artist { max-width:82px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:10px; }
+}
+</style>
+
+</head>
+<body>
+
+    <!-- Links clássicos do cabeçalho que retornaram -->
+    <a href="#" class="header-link">http://brilhos-fm.jp</a>
+    <div class="header-title">音乐の小さな贈り物 · MUSIC GIFT</div>
+
+    <div class="container">
+        
+        <!-- Bloco de títulos da página -->
+        <h1 class="main-title">Mixtape para Mia</h1>
+        <div class="subtitle">vulgo bri, brilhos, bebezinha</div>
+
+        <!-- O seu desenho com a moldura polaroid impecável e a tag certa -->
+        <div class="art-cover-wrapper">
+                <img src="desenho.jpg" class="art-cover" id="fixed-main-cover">
+                <div class="polaroid-label">For Brilhos ♡</div>
+            </div>
+        <audio id="mixtape-player" preload="auto"></audio>
+         <!-- Painel da Biblioteca de Álbuns em Lista -->
+            <div class="library-panel">
+                <div class="library-title">📁 COLEÇÃO DE FITAS CASSETE / ÁLBUNS</div>
+                <div class="library-list" id="tape-library-list">
+                    <!-- As fitas cadastradas no JavaScript vão aparecer aqui em lista -->
+                </div>
+            </div>
+            <div class="library-actions">
+                <button id="favorites-toggle" type="button" aria-expanded="false">♡ MINHAS FAVORITAS</button>
+                <span>salvas neste navegador</span>
+            </div>
+            <section id="favorites-panel" class="favorites-panel" aria-label="Músicas favoritas">
+                <div class="favorites-heading">♡ MUSIC BOX / FAVORITES</div>
+                <div id="favorites-list"></div>
+            </section>
+            <!-- Painel exclusivo para a capa do álbum selecionado (Posicionado acima da fita) -->
+            <div id="album-cover-panel" style="text-align: center; margin: 10px 0; display: none;">
+                <div style="font-size: 11px; font-weight: bold; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">💿 Álbum Atual:</div>
+                <img id="current-album-img" src="" style="max-width: 180px; border: 4px double #b85b88; padding: 4px; background: white; box-shadow: 4px 4px 0px rgba(184, 91, 136, 0.15); border-radius: 2px;">
+            </div>
+        <div class="player-panel">
+            <div class="cassette-player" id="cassette-container">
+                <div class="stereo-mix-header">
+                    <span>STEREO MIX · 2000</span>
+                    <span>NO. 009 ♡</span>
+                </div>
+
+                <div class="cassette-label">
+                    <div class="label-title">For Brilhos</div>
+                    <div class="label-subtitle">SIDE A · A MIXTAPE FOR MIA</div>
+                </div>
+
+                <!-- Visor clássico de fita cassete preta com bobinas giratórias -->
+                <div class="cassette-center">
+                    <div class="wheels-container">
+                        <div class="wheel"></div>
+
+                        </div>
+                        <div class="current-track-info" id="live-display">CHOOSE A TRACK TO START</div>
+                    </div>
+                </div>
+
+                <div class="cassette-footer">
+                    <div class="control-actions">
+                        <button id="btn-play">PLAY ▶</button>
+                        <button id="btn-prev">REW ◀◀</button>
+                        <button id="btn-next">NEXT ⏭</button>
+                    </div>
+                    <span>Layout por ♡ NICK</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="track-notes-panel" id="notes-display">
+            Escolha uma música abaixo para ver o detalhe especial dela...
+        </div>
+
+        <div class="tracklist-panel">
+            <div class="tracklist-header">
+                <span>Track list ♫</span>
+                <span>THE BACK OF THE TAPE</span>
+            </div>
+            <div id="playlist"></div>
+                <div class="footer-note">Mia bobona ♡</div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <aside class="mini-player" aria-label="Player fixo">
+        <div class="mini-player-inner">
+            <div class="mini-player-record">♫</div>
+            <div class="mini-player-meta">
+                <div id="mini-player-state">READY</div>
+                <strong id="mini-track-title">Escolha uma música</strong>
+                <span id="mini-track-artist">seu pequeno arquivo musical ♡</span>
+            </div>
+            <button id="mini-favorite" class="mini-heart" type="button" aria-label="Favoritar faixa">♡</button>
+            <div class="mini-controls">
+                <button id="mini-prev" type="button" aria-label="Faixa anterior">◀◀</button>
+                <button id="mini-play" type="button" aria-label="Play ou pause">▶</button>
+                <button id="mini-next" type="button" aria-label="Próxima faixa">▶▶</button>
+            </div>
+        </div>
+    </aside>
+
+<script>
+const audioPlayer = document.getElementById('mixtape-player');
+const playBtn = document.getElementById('btn-play');
+const cassette = document.getElementById('cassette-container');
+const display = document.getElementById('live-display');
+const notesDisplay = document.getElementById('notes-display');
+
+let currentTape = 'mixtape';       // álbum que está aberto
+let playingTape = null;            // álbum da faixa que está tocando
+let playingTrackIndex = -1;
+
+const FAVORITES_KEY = 'mia-nick-music-favorites-v1';
+let favorites = [];
+try {
+    favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+    if (!Array.isArray(favorites)) favorites = [];
+} catch (_) { favorites = []; }
+
+const tapeLibrary = {
+    mixtape: {
+        name: "Mixtape - For Brilhos",
+        title: "For Brilhos",
+        subtitle: "SIDE A · A MIXTAPE FOR MIA",
+        colorClass: "tape-pink",
+        albumCover: "",
+        tracks: [
+            { num: "01", title: "Be Quiet and Drive (Far Away)", artist: "Deftones", src: "musicas/01.mp3", note: "Uma música que lembra você" },
+            { num: "02", title: "Peso", artist: "A$AP Rocky", src: "musicas/02.mp3", note: "Uma música que você me apresentou" },
+            { num: "03", title: "Luv (sic) pt3", artist: "Nujabes, Shing02", src: "musicas/03.mp3", note: "Uma música que combina com o seu gosto" },
+            { num: "04", title: "dltt (Delatete)", artist: "Coaltar Of The Deepers", src: "musicas/04.mp3", note: "Uma descoberta que eu quero compartilhar" },
+            { num: "05", title: "D>E>A>T>H>M>E>T>A>L", artist: "Panchiko", src: "musicas/05.mp3", note: "Uma música que nós gostamos" },
+            { num: "06", title: "Back to the Old House", artist: "The Smiths", src: "musicas/06.mp3", note: "Uma música aconchegante" },
+            { num: "07", title: "Here, There and Everywhere", artist: "The Beatles", src: "musicas/07.mp3", note: "Uma música que eu gostaria que você conhecesse" },
+            { num: "08", title: "The Spins", artist: "Mac Miller", src: "musicas/08.mp3", note: "Uma música que você gosta bastante" },
+            { num: "09", title: "I think about you all the time", artist: "Deftones", src: "musicas/09.mp3", note: "Uma especial escolhida por você mesma! Espero que tenha gostado" }
+        ]
+    },
+    panchiko_deathmetal: {
+        name: "Panchiko - DEATHMETAL",
+        title: "D>E>A>T>H>M>E>T>A>L",
+        subtitle: "SIDE B · FULL ALBUM",
+        colorClass: "tape-purple",
+        albumCover: "panchiko_cover.jpg",
+        tracks: [
+            { num: "01", title: "D>E>A>T>H>M>E>T>A>L", artist: "Panchiko", src: "musicas/panchiko_deathmetal/01.mp3", note: "Track 01" },
+            { num: "02", title: "Stabilisers for Big Boys", artist: "Panchiko", src: "musicas/panchiko_deathmetal/02.mp3", note: "Track 02" },
+            { num: "03", title: "Laputa", artist: "Panchiko", src: "musicas/panchiko_deathmetal/03.mp3", note: "Track 03" }
+        ]
+    }
+};
+
+function trackId(tapeKey, index) { return `${tapeKey}::${index}`; }
+function getTrack(tapeKey, index) { return tapeLibrary[tapeKey]?.tracks[index]; }
+function isFavorite(tapeKey, index) { return favorites.includes(trackId(tapeKey, index)); }
+function saveFavorites() {
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites)); } catch (_) {}
+    renderFavorites();
+    renderPlaylist();
+    updateMiniPlayer();
+}
+function toggleFavorite(tapeKey, index) {
+    const id = trackId(tapeKey, index);
+    favorites = isFavorite(tapeKey, index) ? favorites.filter(x => x !== id) : [...favorites, id];
+    saveFavorites();
+}
+function updateMiniPlayer() {
+    const title = document.getElementById('mini-track-title');
+    const artist = document.getElementById('mini-track-artist');
+    const heart = document.getElementById('mini-favorite');
+    const state = document.getElementById('mini-player-state');
+    if (playingTape && playingTrackIndex >= 0) {
+        const track = getTrack(playingTape, playingTrackIndex);
+        title.textContent = track?.title || 'Faixa desconhecida';
+        artist.textContent = `${track?.artist || ''} · ${tapeLibrary[playingTape].name}`;
+        heart.textContent = isFavorite(playingTape, playingTrackIndex) ? '♥' : '♡';
+        heart.classList.toggle('is-favorite', isFavorite(playingTape, playingTrackIndex));
+        state.textContent = audioPlayer.paused ? 'PAUSADO' : 'NOW PLAYING';
+    } else {
+        title.textContent = 'Escolha uma música';
+        artist.textContent = 'seu pequeno arquivo musical ♡';
+        heart.textContent = '♡';
+        heart.classList.remove('is-favorite');
+        state.textContent = 'READY';
+    }
+    const miniPlay = document.getElementById('mini-play');
+    if (miniPlay) miniPlay.textContent = audioPlayer.paused ? '▶' : 'Ⅱ';
+}
+function syncPlayingUI() {
+    const track = playingTape ? getTrack(playingTape, playingTrackIndex) : null;
+    const playing = !!track && !audioPlayer.paused;
+    cassette?.classList.toggle('playing', playing);
+    if (playBtn) playBtn.textContent = playing ? 'PAUSE ⏸' : 'PLAY ▶';
+    if (track) {
+        display.innerHTML = `${audioPlayer.paused ? 'PAUSED:' : 'PLAYING:'}<br>${track.title}<br><span style="color:#aa88aa">${track.artist}</span>`;
+    }
+    updateMiniPlayer();
+    renderPlaylist();
+}
+function generateLibraryMenu() {
+    const menu = document.getElementById('tape-library-list');
+    menu.innerHTML = '';
+    Object.keys(tapeLibrary).forEach(key => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = `library-item ${key === currentTape ? 'active-tape-item' : ''}`;
+        row.innerHTML = `<span>盒 ${tapeLibrary[key].name}</span><span>➔</span>`;
+        row.addEventListener('click', () => switchCassette(key));
+        menu.appendChild(row);
+    });
+}
+function renderPlaylist() {
+    const playlist = document.getElementById('playlist');
+    if (!playlist) return;
+    playlist.innerHTML = '';
+    tapeLibrary[currentTape].tracks.forEach((track, index) => {
+        const item = document.createElement('div');
+        const isPlaying = playingTape === currentTape && playingTrackIndex === index;
+        item.className = `track-item ${isPlaying ? 'active-track' : ''}`;
+        const left = document.createElement('div');
+        left.className = 'track-left';
+        const number = document.createElement('span');
+        number.className = 'track-number';
+        number.textContent = track.num;
+        const title = document.createElement('span');
+        title.className = 'track-title';
+        title.textContent = track.title;
+        const right = document.createElement('div');
+        right.className = 'track-right';
+        const artist = document.createElement('span');
+        artist.className = 'track-artist';
+        artist.textContent = track.artist;
+        const heart = document.createElement('button');
+        heart.type = 'button';
+        heart.className = `track-favorite ${isFavorite(currentTape, index) ? 'is-favorite' : ''}`;
+        heart.textContent = isFavorite(currentTape, index) ? '♥' : '♡';
+        heart.title = 'Adicionar/remover dos favoritos';
+        heart.addEventListener('click', event => { event.stopPropagation(); toggleFavorite(currentTape, index); });
+        const download = document.createElement('a');
+        download.href = track.src;
+        download.download = `${track.title.replace(/[\/:*?"<>|]/g, '')}.mp3`;
+        download.className = 'download-icon';
+        download.textContent = '⇩';
+        download.title = 'Baixar arquivo de áudio';
+        download.addEventListener('click', event => event.stopPropagation());
+        left.append(number, title);
+        right.append(artist, heart, download);
+        item.append(left, right);
+        item.addEventListener('click', () => selectTrack(currentTape, index));
+        playlist.appendChild(item);
+    });
+}
+function renderFavorites() {
+    const panel = document.getElementById('favorites-list');
+    if (!panel) return;
+    panel.innerHTML = '';
+    const entries = favorites.map(id => {
+        const [tapeKey, indexText] = id.split('::');
+        const index = Number(indexText);
+        const track = getTrack(tapeKey, index);
+        return track ? { tapeKey, index, track } : null;
+    }).filter(Boolean);
+    if (!entries.length) {
+        const empty = document.createElement('p');
+        empty.className = 'favorites-empty';
+        empty.textContent = 'Ainda não há favoritas por aqui. Toque no ♡ ao lado de uma faixa para guardá-la!';
+        panel.appendChild(empty);
+        return;
+    }
+    entries.forEach(({tapeKey, index, track}) => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'favorite-row';
+        const info = document.createElement('span');
+        info.textContent = `${track.title} — ${track.artist}`;
+        const album = document.createElement('small');
+        album.textContent = tapeLibrary[tapeKey].name;
+        const remove = document.createElement('span');
+        remove.className = 'favorite-remove';
+        remove.textContent = '♥';
+        const textWrap = document.createElement('span');
+        textWrap.className = 'favorite-info';
+        textWrap.append(info, album);
+        row.append(textWrap, remove);
+        row.addEventListener('click', () => {
+            switchCassette(tapeKey);
+            selectTrack(tapeKey, index);
+            document.getElementById('favorites-panel').classList.remove('favorites-open');
+            document.getElementById('favorites-toggle').setAttribute('aria-expanded', 'false');
+        });
+        panel.appendChild(row);
+    });
+}
+function switchCassette(tapeKey) {
+    if (!tapeLibrary[tapeKey]) return;
+    // Não pausa nem altera o elemento <audio>: a faixa atual continua tocando.
+    currentTape = tapeKey;
+    const tape = tapeLibrary[tapeKey];
+    document.querySelector('.label-title').textContent = tape.title;
+    document.querySelector('.label-subtitle').textContent = tape.subtitle;
+    cassette.className = `cassette-player ${tape.colorClass}`;
+    const coverPanel = document.getElementById('album-cover-panel');
+    const coverImg = document.getElementById('current-album-img');
+    if (coverPanel && coverImg) {
+        if (tape.albumCover) {
+            coverImg.src = tape.albumCover;
+            coverPanel.style.display = 'block';
+        } else {
+            coverPanel.style.display = 'none';
+        }
+    }
+    generateLibraryMenu();
+    renderPlaylist();
+    if (playingTape) {
+        const playing = getTrack(playingTape, playingTrackIndex);
+        display.innerHTML = `${audioPlayer.paused ? 'PAUSED:' : 'PLAYING:'}<br>${playing.title}<br><span style="color:#aa88aa">${playing.artist}</span>`;
+    } else {
+        display.innerHTML = 'CHOOSE A TRACK<br>TO START THE TAPE';
+    }
+    updateMiniPlayer();
+}
+function selectTrack(tapeKey, index) {
+    const track = getTrack(tapeKey, index);
+    if (!track) return;
+    playingTape = tapeKey;
+    playingTrackIndex = index;
+    audioPlayer.src = track.src;
+    display.innerHTML = `PLAYING:<br>${track.title}<br><span style="color:#aa88aa">${track.artist}</span>`;
+    notesDisplay.innerHTML = `🎵 <strong>Nota da Faixa:</strong> <span class="note-highlight">"${track.note}"</span>`;
+    audioPlayer.play().then(syncPlayingUI).catch(() => {
+        display.innerHTML = `CLICK PLAY TO START:<br>${track.title}`;
+        syncPlayingUI();
+    });
+    renderPlaylist();
+    updateMiniPlayer();
+}
+function togglePlay() {
+    if (!playingTape || playingTrackIndex < 0) {
+        selectTrack(currentTape, 0);
+        return;
+    }
+    if (audioPlayer.paused) audioPlayer.play().then(syncPlayingUI).catch(syncPlayingUI);
+    else audioPlayer.pause();
+    syncPlayingUI();
+}
+function playRelative(direction) {
+    if (!playingTape || playingTrackIndex < 0) {
+        if (direction > 0) selectTrack(currentTape, 0);
+        return;
+    }
+    const tracks = tapeLibrary[playingTape].tracks;
+    const next = (playingTrackIndex + direction + tracks.length) % tracks.length;
+    selectTrack(playingTape, next);
+}
+function playPrev() { playRelative(-1); }
+function playNext() { playRelative(1); }
+
+audioPlayer.addEventListener('play', syncPlayingUI);
+audioPlayer.addEventListener('pause', syncPlayingUI);
+audioPlayer.addEventListener('ended', () => {
+    const tracks = tapeLibrary[playingTape]?.tracks || [];
+    if (playingTrackIndex + 1 < tracks.length) selectTrack(playingTape, playingTrackIndex + 1);
+    else {
+        cassette.classList.remove('playing');
+        display.innerHTML = 'THE END ♡';
+        notesDisplay.textContent = 'Fim da fita! Obrigado por ouvir tudo ♡';
+        playingTape = null;
+        playingTrackIndex = -1;
+        syncPlayingUI();
+    }
+});
+
+document.getElementById('mini-play').addEventListener('click', togglePlay);
+document.getElementById('mini-prev').addEventListener('click', playPrev);
+document.getElementById('mini-next').addEventListener('click', playNext);
+document.getElementById('mini-favorite').addEventListener('click', () => {
+    if (playingTape && playingTrackIndex >= 0) toggleFavorite(playingTape, playingTrackIndex);
+});
+document.getElementById('favorites-toggle').addEventListener('click', () => {
+    const panel = document.getElementById('favorites-panel');
+    const open = panel.classList.toggle('favorites-open');
+    document.getElementById('favorites-toggle').setAttribute('aria-expanded', String(open));
+});
+document.getElementById('btn-play').addEventListener('click', togglePlay);
+document.getElementById('btn-prev').addEventListener('click', playPrev);
+document.getElementById('btn-next').addEventListener('click', playNext);
+
+generateLibraryMenu();
+switchCassette('mixtape');
+renderFavorites();
+updateMiniPlayer();
+</script>
+
+</body>
+</html>
