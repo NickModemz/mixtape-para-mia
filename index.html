@@ -593,11 +593,16 @@
 
         <div class="track-notes-panel" id="notes-display">
         <!-- Painel dinâmico para a capa do álbum selecionado -->
-        <div id="album-cover-panel" style="text-align: center; margin-top: 15px; display: none;">
-            <img id="current-album-img" src="" style="max-width: 200px; border: 3px double #b85b88; padding: 4px; background: white; box-shadow: 3px 3px 0px rgba(0,0,0,0.05);">
-        </div>
-            Escolha uma música abaixo para ver o detalhe especial dela...
-        </div>
+                    <!-- Caixinha Interativa de Notas das Músicas -->
+            <div class="track-notes-panel" id="notes-display">
+                Escolha uma música abaixo para ver o detalhe especial dela...
+            </div>
+
+            <!-- Painel ISOLADO e exclusivo para a capa do álbum selecionado -->
+            <div id="album-cover-panel" style="text-align: center; margin-top: 15px; display: none;">
+                <div style="font-size: 11px; font-weight: bold; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">💿 Arte do Álbum:</div>
+                <img id="current-album-img" src="" style="max-width: 180px; border: 4px double #b85b88; padding: 4px; background: white; box-shadow: 4px 4px 0px rgba(184, 91, 136, 0.15); border-radius: 2px;">
+            </div>
 
         <div class="tracklist-panel">
             <div class="tracklist-header">
@@ -686,14 +691,16 @@
         // Muda a classe de cor da fita cassete
         if (cassette) cassette.className = `cassette-player ${tapeLibrary[tapeKey].colorClass}`;
         // 🖼️ Abre a capa do álbum menor abaixo do player se ela existir no banco de dados
+        // Controla a exibição da capa do álbum menor abaixo do player se ela existir no banco de dados
         const coverPanel = document.getElementById('album-cover-panel');
         const coverImg = document.getElementById('current-album-img');
         if (coverPanel && coverImg) {
             if (tapeLibrary[tapeKey].albumCover) {
                 coverImg.src = tapeLibrary[tapeKey].albumCover;
-                coverPanel.style.display = 'block'; // Mostra a capinha menor
+                coverPanel.style.display = 'block'; // Mostra o painel se houver capa configurada
             } else {
-                coverPanel.style.display = 'none';  // Esconde na primeira fita para manter limpo
+                coverImg.src = '';
+                coverPanel.style.display = 'none';  // Oculta completamente na mixtape original para manter limpo
             }
         }
 
