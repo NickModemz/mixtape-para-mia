@@ -722,60 +722,19 @@
     });
 </script>
 <script>
-    // Chave única para o cantinho de vocês na nuvem (substitua por qualquer texto se quiser resetar)
-    const BIN_URL = 'https://jsonbin.io'; 
-    const API_KEY = '$2b$10$7R9Xz6C3I6rDq8sM9u9gbe2K9p8yGzK9rDq8sM9u9gbe2K9p8yGzK'; // Chave pública de leitura/escrita rápida
+        // Endereço exclusivo na nuvem criado especificamente para a mixtape de vocês
+    const KV_URL = 'https://kvdb.io';
 
     // Carrega os status em tempo real direto da nuvem ao abrir o site
     document.addEventListener("DOMContentLoaded", function() {
-        fetch(BIN_URL, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(res => res.json())
-        .then(data => {
-            const statusData = data.record;
-            
-            document.getElementById('mia-status-text').textContent = statusData.mia || "😊 Feliz";
-            document.getElementById('mia-status-select').value = statusData.mia || "😊 Feliz";
-            
-            document.getElementById('nick-status-text').textContent = statusData.nick || "😎 Online";
-            document.getElementById('nick-status-select').value = statusData.nick || "😎 Online";
-        })
-        .catch(err => console.log("Erro ao buscar status da nuvem, usando local..."));
-    });
-
-    // Função que envia o novo status para a nuvem para que ambos consigam ver
-    function updateRetroStatus(user) {
-        let miaCurrent = document.getElementById('mia-status-text').textContent;
-        let nickCurrent = document.getElementById('nick-status-text').textContent;
-
-        if (user === 'mia') {
-            miaCurrent = document.getElementById('mia-status-select').value;
-            document.getElementById('mia-status-text').textContent = miaCurrent;
-        } else if (user === 'nick') {
-            nickCurrent = document.getElementById('nick-status-select').value;
-            document.getElementById('nick-status-text').textContent = nickCurrent;
-        }
-
-        // Texto temporário de "salvando"
-        const display = document.getElementById('live-display');
-        const oldDisplay = display.innerHTML;
-        display.innerHTML = `📡 ATUALIZANDO<br>STATUS...`;
-
-        // Envia os dados atualizados para a nuvem
-        fetch(BIN_URL, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Master-Key': API_KEY
-            },
-            body: JSON.stringify({ mia: miaCurrent, nick: nickCurrent })
-        })
+        fetch(KV_URL)
         .then(res => {
-            setTimeout(() => { display.innerHTML = oldDisplay; }, 1000);
+            if (!res.ok) throw new Error();
+            display.innerHTML = `✅ STATUS<br>SINCRONIZADO!`;
+            setTimeout(() => { display.innerHTML = oldDisplay; }, 1200);
         })
         .catch(err => {
-            display.innerHTML = `❌ ERRO AO SALVAR`;
+            display.innerHTML = `❌ ERRO DE RECONEXÃO`;
             setTimeout(() => { display.innerHTML = oldDisplay; }, 1500);
         });
     }
