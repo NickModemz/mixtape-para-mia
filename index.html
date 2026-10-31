@@ -202,7 +202,73 @@
             transition: transform 0.1s;
         }
         .download-icon:hover { transform: scale(1.2); color: #b85b88; }
-        /* Painel Superior do Player Arredondado */
+                /* BIBLIOTECA DE ALBUNS EM LISTA RETRÔ */
+        .library-panel {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.08);
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .library-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 6px;
+        }
+        .library-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .library-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.15s ease;
+        }
+        .library-item:hover {
+            background: #fff5f8;
+            border-color: #e2aec7;
+            color: #b85b88;
+            padding-left: 16px;
+        }
+        .library-item.active-tape-item {
+            background: #ffeef4;
+            border-color: #b85b88;
+            color: #b85b88;
+        }
+
+        /* Biblioteca de cores para as fitas cassete */
+        .cassette-player.tape-pink { background-color: #f7d1e3; border-color: #e2aec7; }
+        .cassette-player.tape-blue { background-color: #d6e4f0; border-color: #a3c2dc; }
+        .cassette-player.tape-purple { background-color: #e9d5ff; border-color: #c084fc; }
+        .cassette-player.tape-green { background-color: #d1fae5; border-color: #34d399; }
+        
+        .download-icon {
+            background: none; border: none; cursor: pointer;
+            font-size: 14px; padding: 0 4px; color: #94a3b8; text-decoration: none;
+        }
+        .download-icon:hover { color: #b85b88; transform: scale(1.1); }
         .player-panel {
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
@@ -485,12 +551,11 @@
         </div>
         
         <audio id="mixtape-player" preload="auto"></audio>
-            <!-- Seletor de Mixtapes / Álbuns -->
-            <div class="tape-selector-panel">
-                <div class="tape-selector-title">📼 Escolha a Fita para Tocar:</div>
-                <div class="tape-tabs">
-                    <button class="tape-tab-btn active-tape" onclick="switchCassette('mixtape', this)">MIX 008 (Rosa)</button>
-                    <button class="tape-tab-btn" onclick="switchCassette('deftones', this)">DEFTONES ALBUM (Azul)</button>
+            <!-- Painel da Biblioteca de Álbuns em Lista -->
+            <div class="library-panel">
+                <div class="library-title">📁 COLEÇÃO DE FITAS CASSETE / ÁLBUNS</div>
+                <div class="library-list" id="tape-library-list">
+                    <!-- As fitas cadastradas no JavaScript vão aparecer aqui em lista -->
                 </div>
             </div>
         <!-- Painel do Player Arredondado -->
