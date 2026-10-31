@@ -1,2 +1,2 @@
 # mixtape-para-mia
-uma pequena mixtape para Brilhos ♡
+uma pequena mixtape para Brilhos 
