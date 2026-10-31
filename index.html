@@ -16,6 +16,23 @@
             margin: 0;
         }
 
+        /* O cabeçalho clássico que havia sumido */
+        .header-link {
+            font-size: 13px;
+            color: #5a738e;
+            text-decoration: none;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        .header-title {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
         .container {
             width: 100%;
             max-width: 480px;
@@ -24,7 +41,57 @@
             gap: 20px;
         }
 
-        /* Painel Superior do Player */
+        /* Títulos originais do topo do painel */
+        .main-title {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 4px 0;
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Moldura Polaroid Polida para o seu Desenho */
+        .art-cover-wrapper {
+            background: white;
+            padding: 16px 16px 60px 16px;
+            border-radius: 4px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            border: 1px solid #eef2f5;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        .art-cover {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            display: block;
+            border: 1px solid #f0f0f0;
+        }
+        .polaroid-label {
+            position: absolute;
+            bottom: 16px;
+            right: 18px;
+            background-color: white;
+            border: 1px solid #e2aec7;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 13px;
+            font-weight: bold;
+            color: #b85b88;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.03);
+            font-style: italic;
+        }
+
+        /* Painel Superior do Player Arredondado */
         .player-panel {
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
@@ -78,58 +145,31 @@
             text-transform: uppercase;
         }
 
-        /* Área Central onde as bobinas ficam sobre o seu desenho */
+        /* Visor Interno Escuro Clássico da Fita */
         .cassette-center {
             background: #1e1e1e;
-            height: 240px;
+            height: 110px;
             border-radius: 8px;
             position: relative;
             overflow: hidden;
             border: 2px solid #0f172a;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* O seu desenho esticado perfeitamente no fundo do visor */
-        .bg-drawing {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-            z-index: 1;
-        }
-
-        /* Camada superior para as bobinas e textos flutuarem sobre o desenho */
-        .cassette-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 10px;
-            box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.2);
+            justify-content: center;
+            align-items: center;
         }
 
         .wheels-container {
             display: flex;
             justify-content: center;
-            gap: 80px;
-            margin-top: 10px;
+            gap: 70px;
+            margin-bottom: 12px;
         }
 
         .wheel {
-            width: 36px;
-            height: 36px;
-            border: 4px dashed rgba(255, 255, 255, 0.6);
+            width: 38px;
+            height: 38px;
+            border: 4px dashed rgba(255, 255, 255, 0.2);
             border-radius: 50%;
         }
 
@@ -149,17 +189,13 @@
             font-size: 11px;
             text-align: center;
             letter-spacing: 0.5px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 6px;
-            border-radius: 4px;
-            margin-bottom: 5px;
             font-weight: bold;
-            border: 1px solid #334155;
+            line-height: 1.3;
         }
 
         /* Rodapé de comandos da fita */
         .cassette-footer {
-            margin-top: 12px;
+            margin-top: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -274,10 +310,25 @@
 </head>
 <body>
 
+    <!-- Links clássicos do cabeçalho que retornaram -->
+    <a href="#" class="header-link">http://brilhos-fm.jp</a>
+    <div class="header-title">音乐の小さな贈り物 · MUSIC GIFT</div>
+
     <div class="container">
+        
+        <!-- Bloco de títulos da página -->
+        <h1 class="main-title">Mixtape para Mia</h1>
+        <div class="subtitle">for Brilhos ♡</div>
+
+        <!-- O seu desenho com a moldura polaroid impecável e a tag certa -->
+        <div class="art-cover-wrapper">
+            <img src="mixtape capa.jpg" alt="Desenho feito à mão de Nick e Brilhos usando fones de ouvido" class="art-cover">
+            <div class="polaroid-label">For Brilhos ♡</div>
+        </div>
         
         <audio id="mixtape-player" preload="auto"></audio>
 
+        <!-- Painel do Player Arredondado -->
         <div class="player-panel">
             <div class="cassette-player" id="cassette-container">
                 <div class="stereo-mix-header">
@@ -290,12 +341,11 @@
                     <div class="label-subtitle">SIDE A · A MIXTAPE FOR MIA</div>
                 </div>
 
+                <!-- Visor clássico de fita cassete preta com bobinas giratórias -->
                 <div class="cassette-center">
-                    <img src="mixtape capa.jpg" alt="Capa" class="bg-drawing">
-                    <div class="cassette-overlay">
-                        <div class="wheels-container">
-                            <div class="wheel"></div>
-                            <div class="wheel"></div>
+                    <div class="wheels-container">
+                        <div class="wheel"></div>
+
                         </div>
                         <div class="current-track-info" id="live-display">CHOOSE A TRACK TO START</div>
                     </div>
