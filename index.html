@@ -6,79 +6,143 @@
     <title>Mixtape para Mia ♡</title>
     <style>
         body {
+            /* Fundo quadriculado estampa Y2K / Anos 2000 de sites de anime */
             background-color: #d2e4f0;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.4) 1px, transparent 1px);
+            background-size: 20px 20px;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 15px;
+            padding: 0;
             color: #334155;
             margin: 0;
         }
 
-        /* O cabeçalho clássico que havia sumido */
-        .header-link {
-            font-size: 13px;
-            color: #5a738e;
-            text-decoration: none;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-        .header-title {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #7f8c8d;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            font-weight: bold;
+        /* Moldura simulando o topo de um navegador antigo dos anos 2000 */
+        .browser-window {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-left: 1px solid #b4c6d4;
+            border-right: 1px solid #b4c6d4;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            min-height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0 40px 0;
         }
 
-        .container {
+        .browser-top-bar {
+            width: 100%;
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-sizing: border-box;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+        .dot.red { background: #fc8181; }
+        .dot.yellow { background: #f6e05e; }
+        .dot.green { background: #68d391; }
+
+        .browser-address {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: #64748b;
+            flex-grow: 1;
+            max-width: 320px;
+        }
+
+        .page-content-wrapper {
             width: 100%;
             max-width: 480px;
+            padding: 30px 15px 0 15px;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* Títulos originais do topo do painel */
+        /* Cabeçalhos Japoneses Originais Retornados */
+        .header-title-jap {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #7f8c8d;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
         .main-title {
             font-family: 'Georgia', serif;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: bold;
-            color: #2c3e50;
-            margin: 0 0 4px 0;
+            color: #3b5998; /* Azul clássico de layouts antigos */
+            margin: 5px 0 2px 0;
             text-align: center;
+            letter-spacing: -0.5px;
         }
+
         .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #7f8c8d;
-            margin: 0 0 20px 0;
+            margin: 0 0 15px 0;
             text-align: center;
             font-weight: bold;
         }
 
-        /* Moldura Polaroid Polida para o seu Desenho */
+        /* Divisor pontilhado horizontal clássico do seu print */
+        .dashed-line {
+            width: 100%;
+            border-bottom: 1px dashed #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        /* Moldura Polaroid Perfeita do Desenho */
         .art-cover-wrapper {
             background: white;
-            padding: 16px 16px 60px 16px;
-            border-radius: 4px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            padding: 14px 14px 64px 14px;
+            border-radius: 2px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
             border: 1px solid #eef2f5;
-            margin-bottom: 5px;
             position: relative;
+            box-sizing: border-box;
+            width: 100%;
         }
+
         .art-cover {
             width: 100%;
             height: auto;
-            border-radius: 2px;
             display: block;
             border: 1px solid #f0f0f0;
         }
+
         .polaroid-label {
             position: absolute;
             bottom: 16px;
-            right: 18px;
+            right: 14px;
             background-color: white;
             border: 1px solid #e2aec7;
             padding: 6px 14px;
@@ -97,17 +161,15 @@
             border: 1px solid #cbd5e1;
             border-radius: 20px;
             padding: 12px;
-            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.25);
+            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.15);
         }
 
-        /* Corpo da Fita Cassete Rosa */
         .cassette-player {
             background-color: #f7d1e3;
             border: 2px solid #e2aec7;
             border-radius: 14px;
             padding: 16px;
             position: relative;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
         }
 
         .stereo-mix-header {
@@ -145,7 +207,6 @@
             text-transform: uppercase;
         }
 
-        /* Visor Interno Escuro Clássico da Fita */
         .cassette-center {
             background: #1e1e1e;
             height: 110px;
@@ -193,7 +254,6 @@
             line-height: 1.3;
         }
 
-        /* Rodapé de comandos da fita */
         .cassette-footer {
             margin-top: 14px;
             display: flex;
@@ -220,7 +280,6 @@
             color: #b85b88;
         }
 
-        /* Caixinha de Comentários / Notas das Músicas */
         .track-notes-panel {
             background: white;
             border: 1px solid #e2ebf0;
@@ -230,16 +289,15 @@
             color: #64748b;
             text-align: center;
             font-style: italic;
-            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.08);
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05);
         }
 
-        /* Painel Inferior da Lista de Músicas */
         .tracklist-panel {
             background: white;
             border: 1px solid #cbd5e1;
             border-radius: 14px;
             padding: 24px;
-            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.15);
+            box-shadow: 0 6px 18px rgba(148, 163, 184, 0.08);
         }
 
         .tracklist-header {
@@ -303,9 +361,7 @@
             text-align: center;
             margin-top: 20px;
             font-size: 13px;
-            color: #64748b;
-            font-weight: bold;
-        }
+Use o código com cuidado.
     </style>
 </head>
 <body>
@@ -322,7 +378,7 @@
 
         <!-- O seu desenho com a moldura polaroid impecável e a tag certa -->
         <div class="art-cover-wrapper">
-            <img src="mixtape capa.jpg" alt="Desenho feito à mão de Nick e Brilhos usando fones de ouvido" class="art-cover">
+            <img src="desenho.jpg" alt="Desenho feito à mão de Nick e Brilhos usando fones de ouvido" class="art-cover">
             <div class="polaroid-label">For Brilhos ♡</div>
         </div>
         
