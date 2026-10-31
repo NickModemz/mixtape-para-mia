@@ -71,74 +71,7 @@
             flex-grow: 1;
             max-width: 320px;
         }
-        .profiles-container {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-            box-sizing: border-box;
-            margin-bottom: 5px;
-        }
-        .profile-card {
-            flex: 1;
-            background: #fafbfc;
-            border: 2px solid #cbd5e1;
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
-        }
-        .profile-card.mia-card { border-color: #e2aec7; background: #fffcfd; }
-        .profile-card.nick-card { border-color: #b4c6d4; background: #fafdff; }
-        
-        .profile-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* Deixa as fotinhas redondas e fofas estilo MSN */
-            border: 2px solid #cbd5e1;
-            object-fit: cover; /* Faz a foto se ajustar sem amassar */
-            background: white;
-        }
-        .mia-card .profile-avatar { border-color: #e2aec7; }
-        .nick-card .profile-avatar { border-color: #b4c6d4; }
 
-        .profile-name {
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .mia-card .profile-name { color: #b85b88; }
-        .nick-card .profile-name { color: #3b5998; }
-
-        .profile-status-display {
-            font-size: 11px;
-            font-weight: bold;
-            background: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            width: 90%;
-            text-align: center;
-            min-height: 16px;
-        }
-        .mia-card .profile-status-display { border-color: #f2d1e1; color: #8c4366; }
-        .nick-card .profile-status-display { border-color: #d2e4f0; color: #2c3e50; }
-
-        .status-select-retro {
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            width: 95%;
-            color: #555;
-        }
         .page-content-wrapper {
             width: 100%;
             max-width: 480px;
@@ -188,17 +121,10 @@
         }
         .art-cover {
             width: 100%;
-            max-width: 280px;
             height: auto;
-            display: block;
-            margin: 0 auto;
-            /* Borda dupla clássica dos anos 2000 (pixel art style) */
-            border: 4px double #b85b88;
-            padding: 4px;
-            background-color: #ffffff;
-            /* Sombra sólida sem desfoque (estilo interface de sistema antigo) */
-            box-shadow: 4px 4px 0px rgba(184, 91, 136, 0.2);
             border-radius: 2px;
+            display: block;
+            border: 1px solid #f0f0f0;
         }
         .polaroid-label {
             position: absolute;
@@ -499,47 +425,7 @@
         </div>
         
         <audio id="mixtape-player" preload="auto"></audio>
-        <div class="profiles-container">
-                <!-- Perfil da Bri -->
-                <div class="profile-card mia-card">
-                    <!-- 💡 Se a foto dela tiver outro nome/extensão, mude em src="bri.jpg" -->
-                    <img src="bri.jpg" alt="Foto Bri" class="profile-avatar">
-                    <div class="profile-name">Bri ♡</div>
-                    <div class="profile-status-display" id="mia-status-text">😊 Feliz</div>
-                    <select id="mia-status-select" class="status-select-retro" onchange="updateRetroStatus('mia')">
-                        <option value="😊 Feliz">😊 Feliz</option>
-                        <option value="😴 Com sono">😴 Com sono</option>
-                        <option value="🍕 Com fome">🍕 Com fome</option>
-                        <option value="😠 Brava/Bravo">😠 Brava/Bravo</option>
-                        <option value="📝 Ocupada/Ocupado">📝 Ocupada/Ocupado</option>
-                        <option value="😭 Triste">😭 Triste</option>
-                        <option value="🎮 Jogando">🎮 Jogando</option>
-                        <option value="🍿 Vendo Anime">🍿 Vendo Anime</option>
-                        <option value="💭 Pensativa/Pensativo">💭 Pensativa/Pensativo</option>
-                        <option value="🙃 Bobona/Bobone">🙃 Bobona/Bobone</option>
-                    </select>
-                </div>
 
-                <!-- Perfil do Nick -->
-                <div class="profile-card nick-card">
-                    <!-- 💡 Se a sua foto tiver outro nome/extensão, mude em src="nick.jpg" -->
-                    <img src="nick.jpg" alt="Foto Nick" class="profile-avatar">
-                    <div class="profile-name">Nick ✨</div>
-                    <div class="profile-status-display" id="nick-status-text">😎 Online</div>
-                    <select id="nick-status-select" class="status-select-retro" onchange="updateRetroStatus('nick')">
-                        <option value="😊 Feliz">😊 Feliz</option>
-                        <option value="😴 Com sono">😴 Com sono</option>
-                        <option value="🍕 Com fome">🍕 Com fome</option>
-                        <option value="😠 Brava/Bravo">😠 Brava/Bravo</option>
-                        <option value="📝 Ocupada/Ocupado">📝 Ocupada/Ocupado</option>
-                        <option value="😭 Triste">😭 Triste</option>
-                        <option value="🎮 Jogando">🎮 Jogando</option>
-                        <option value="🍿 Vendo Anime">🍿 Vendo Anime</option>
-                        <option value="💭 Pensativa/Pensativo">💭 Pensativa/Pensativo</option>
-                        <option value="🙃 Bobona/Bobone">🙃 Bobona/Bobone</option>
-                    </select>
-                </div>
-            </div>
         <!-- Painel do Player Arredondado -->
         <div class="player-panel">
             <div class="cassette-player" id="cassette-container">
@@ -607,7 +493,7 @@
                     <div class="track-item" data-index="3" data-src="musicas/04.mp3" data-note="Uma descoberta que eu quero compartilhar" onclick="selectTrack(this)">
                         <div class="track-left">
                             <span class="track-number">04</span>
-                            <span class="track-title">dl++ (Delatetel) — Sadesper Record Mix</span>
+                            <span class="track-title">dltt (Delatete) — Sadesper Record...</span>
                         </div>
                         <span class="track-artist">Coaltar Of The Deepers</span>
                     </div>
@@ -654,72 +540,77 @@
     </div>
 
 <script>
-    // Canal de dados em texto limpo via API pública ultra rápida e sem bloqueios de segurança
-    const MIA_KEY_URL = 'https://countapi.xyz';
-    const NICK_KEY_URL = 'https://countapi.xyz';
-    const GET_URL = 'https://countapi.xyz';
+    const audioPlayer = document.getElementById('mixtape-player');
+    const playBtn = document.getElementById('btn-play');
+    const cassette = document.getElementById('cassette-container');
+    const display = document.getElementById('live-display');
+    const notesDisplay = document.getElementById('notes-display');
+    const tracks = document.querySelectorAll('.track-item');
+    let currentTrackIndex = -1;
 
-    // Carrega os status em tempo real direto da nuvem ao abrir o site
-    document.addEventListener("DOMContentLoaded", function() {
-        // Tenta buscar o status na nuvem de forma segura
-        fetch('https://allorigins.win' + encodeURIComponent('https://countapi.xyz'))
-        .then(res => res.json())
-        .then(wrapper => {
-            const data = JSON.parse(wrapper.contents);
-            if (data && data.namespace) {
-                // Como a API armazena texto puro codificado, lemos e aplicamos
-                const miaSaved = localStorage.getItem('retroStatusMia') || "😊 Feliz";
-                const nickSaved = localStorage.getItem('retroStatusNick') || "😎 Online";
-                
-                document.getElementById('mia-status-text').textContent = miaSaved;
-                document.getElementById('mia-status-select').value = miaSaved;
-                document.getElementById('nick-status-text').textContent = nickSaved;
-                document.getElementById('nick-status-select').value = nickSaved;
-            }
-        })
-        .catch(err => {
-            // Modo de segurança local caso a rede demore
-            const localMia = localStorage.getItem('retroStatusMia') || "😊 Feliz";
-            const localNick = localStorage.getItem('retroStatusNick') || "😎 Online";
-            document.getElementById('mia-status-text').textContent = localMia;
-            document.getElementById('mia-status-select').value = localMia;
-            document.getElementById('nick-status-text').textContent = localNick;
-            document.getElementById('nick-status-select').value = localNick;
-        });
-    });
-
-    // Função que atualiza na tela instantaneamente e salva na nuvem em segundo plano
-    function updateRetroStatus(user) {
-        let miaCurrent = document.getElementById('mia-status-text').textContent;
-        let nickCurrent = document.getElementById('nick-status-text').textContent;
-
-        if (user === 'mia') {
-            miaCurrent = document.getElementById('mia-status-select').value;
-            document.getElementById('mia-status-text').textContent = miaCurrent;
-            localStorage.setItem('retroStatusMia', miaCurrent); // Garante o salvamento no aparelho dela
-        } else if (user === 'nick') {
-            nickCurrent = document.getElementById('nick-status-select').value;
-            document.getElementById('nick-status-text').textContent = nickCurrent;
-            localStorage.setItem('retroStatusNick', nickCurrent); // Garante o salvamento no seu aparelho
-        }
-
-        // Feedback visual imediato e charmoso na fita cassete rosa
-        const display = document.getElementById('live-display');
-        const oldDisplay = display.innerHTML;
-        display.innerHTML = `📡 PORTAL<br>ATUALIZADO!`;
+    function selectTrack(element) {
+        tracks.forEach(t => t.classList.remove('active-track'));
+        element.classList.add('active-track');
+        currentTrackIndex = parseInt(element.getAttribute('data-index'));
         
-        // Envia para a nuvem de forma assíncrona usando proxy limpo para evitar qualquer erro de CORS
-        const targetUrl = user === 'mia' ? (MIA_KEY_URL + encodeURIComponent(miaCurrent)) : (NICK_KEY_URL + encodeURIComponent(nickCurrent));
+        const title = element.querySelector('.track-title').textContent;
+        const artist = element.querySelector('.track-artist').textContent;
+        const note = element.getAttribute('data-note');
         
-        fetch('https://allorigins.win' + encodeURIComponent(targetUrl))
-        .then(res => {
-            setTimeout(() => { display.innerHTML = oldDisplay; }, 1000);
-        })
-        .catch(err => {
-            // Se houver qualquer oscilação de rede, o site continua funcionando sem travar o botão
-            setTimeout(() => { display.innerHTML = oldDisplay; }, 1000);
+        display.innerHTML = `PLAYING:<br>${title}<br><span style="color:#aa88aa">${artist}</span>`;
+        notesDisplay.innerHTML = `🎵 <strong>Nota da Faixa:</strong> <span class="note-highlight">"${note}"</span>`;
+        
+        audioPlayer.src = element.getAttribute('data-src');
+        audioPlayer.play().catch(err => {
+            display.innerHTML = `CLICK PLAY TO START:<br>${title}`;
         });
+        cassette.classList.add('playing');
+        playBtn.innerHTML = "PAUSE ⏸";
     }
+
+    function togglePlay() {
+        if (currentTrackIndex === -1 && tracks.length > 0) {
+            selectTrack(tracks);
+            return;
+        }
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            cassette.classList.add('playing');
+            playBtn.innerHTML = "PAUSE ⏸";
+        } else {
+            audioPlayer.pause();
+            cassette.classList.remove('playing');
+            playBtn.innerHTML = "PLAY ▶";
+        }
+    }
+
+    function playPrev() {
+        if (currentTrackIndex === -1) return;
+        let prevIndex = currentTrackIndex - 1;
+        if (prevIndex < 0) prevIndex = tracks.length - 1;
+        selectTrack(tracks[prevIndex]);
+    }
+
+    function playNext() {
+        if (currentTrackIndex === -1) return;
+        let nextIndex = currentTrackIndex + 1;
+        if (nextIndex >= tracks.length) nextIndex = 0;
+        selectTrack(tracks[nextIndex]);
+    }
+
+    audioPlayer.addEventListener('ended', () => {
+        let nextIndex = currentTrackIndex + 1;
+        if (nextIndex < tracks.length) {
+            selectTrack(tracks[nextIndex]);
+        } else {
+            cassette.classList.remove('playing');
+            playBtn.innerHTML = "PLAY ▶";
+            display.innerHTML = "THE END ♡";
+            notesDisplay.innerHTML = "Fim da mixtape! Obrigado por ouvir tudo ♡";
+            tracks.forEach(t => t.classList.remove('active-track'));
+            currentTrackIndex = -1;
+        }
+    });
 </script>
 </body>
 </html>
