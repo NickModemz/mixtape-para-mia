@@ -94,14 +94,11 @@
         .profile-card.nick-card { border-color: #b4c6d4; background: #fafdff; }
         
         .profile-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Deixa as fotinhas redondas e fofas estilo MSN */
             border: 2px solid #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+            object-fit: cover; /* Faz a foto se ajustar sem amassar */
             background: white;
         }
         .mia-card .profile-avatar { border-color: #e2aec7; }
@@ -498,29 +495,41 @@
         <div class="profiles-container">
                 <!-- Perfil da Bri -->
                 <div class="profile-card mia-card">
-                    <div class="profile-avatar">🎧</div>
+                    <!-- 💡 Se a foto dela tiver outro nome/extensão, mude em src="bri.jpg" -->
+                    <img src="bri.jpg" alt="Foto Bri" class="profile-avatar">
                     <div class="profile-name">Bri ♡</div>
                     <div class="profile-status-display" id="mia-status-text">😊 Feliz</div>
                     <select id="mia-status-select" class="status-select-retro" onchange="updateRetroStatus('mia')">
                         <option value="😊 Feliz">😊 Feliz</option>
                         <option value="😴 Com sono">😴 Com sono</option>
                         <option value="🍕 Com fome">🍕 Com fome</option>
-                        <option value="😠 Brava">😠 Brava</option>
-                        <option value="📝 Ocupada">📝 Ocupada</option>
+                        <option value="😠 Brava/Bravo">😠 Brava/Bravo</option>
+                        <option value="📝 Ocupada/Ocupado">📝 Ocupada/Ocupado</option>
+                        <option value="😭 Triste">😭 Triste</option>
+                        <option value="🎮 Jogando">🎮 Jogando</option>
+                        <option value="🍿 Vendo Anime">🍿 Vendo Anime</option>
+                        <option value="💭 Pensativa/Pensativo">💭 Pensativa/Pensativo</option>
+                        <option value="🙃 Bobona/Bobone">🙃 Bobona/Bobone</option>
                     </select>
                 </div>
 
                 <!-- Perfil do Nick -->
                 <div class="profile-card nick-card">
-                    <div class="profile-avatar">🎮</div>
+                    <!-- 💡 Se a sua foto tiver outro nome/extensão, mude em src="nick.jpg" -->
+                    <img src="nick.jpg" alt="Foto Nick" class="profile-avatar">
                     <div class="profile-name">Nick ✨</div>
                     <div class="profile-status-display" id="nick-status-text">😎 Online</div>
                     <select id="nick-status-select" class="status-select-retro" onchange="updateRetroStatus('nick')">
-                        <option value="😎 Online">😎 Online</option>
-                        <option value="🥱 Ouvindo Deftones">🥱 Ouvindo Deftones</option>
-                        <option value="💤 Offline">💤 Offline</option>
-                        <option value="💢 Com raiva">💢 Com raiva</option>
+                        <option value="😊 Feliz">😊 Feliz</option>
+                        <option value="😴 Com sono">😴 Com sono</option>
+                        <option value="🍕 Com fome">🍕 Com fome</option>
+                        <option value="😠 Brava/Bravo">😠 Brava/Bravo</option>
+                        <option value="📝 Ocupada/Ocupado">📝 Ocupada/Ocupado</option>
+                        <option value="😭 Triste">😭 Triste</option>
                         <option value="🎮 Jogando">🎮 Jogando</option>
+                        <option value="🍿 Vendo Anime">🍿 Vendo Anime</option>
+                        <option value="💭 Pensativa/Pensativo">💭 Pensativa/Pensativo</option>
+                        <option value="🙃 Bobona/Bobone">🙃 Bobona/Bobone</option>
                     </select>
                 </div>
             </div>
@@ -714,7 +723,7 @@
     // Carrega os status salvos no navegador ao abrir o site
     document.addEventListener("DOMContentLoaded", function() {
         const savedMiaStatus = localStorage.getItem('retroStatusMia') || "😊 Feliz";
-        const savedNickStatus = localStorage.getItem('retroStatusNick') || "😎 Online";
+        const savedNickStatus = localStorage.getItem('retroStatusNick') || "😊 Feliz";
         
         document.getElementById('mia-status-text').textContent = savedMiaStatus;
         document.getElementById('mia-status-select').value = savedMiaStatus;
