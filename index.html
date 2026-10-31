@@ -6,7 +6,6 @@
     <title>Mixtape para Mia ♡</title>
     <style>
         body {
-            /* Fundo quadriculado estampa Y2K / Anos 2000 de sites de anime */
             background-color: #d2e4f0;
             background-image: 
                 linear-gradient(to right, rgba(255,255,255,0.4) 1px, transparent 1px),
@@ -21,7 +20,6 @@
             margin: 0;
         }
 
-        /* Moldura simulando o topo de um navegador antigo dos anos 2000 */
         .browser-window {
             width: 100%;
             max-width: 600px;
@@ -84,7 +82,6 @@
             gap: 20px;
         }
 
-        /* Cabeçalhos Japoneses Originais Retornados */
         .header-title-jap {
             font-size: 11px;
             letter-spacing: 2px;
@@ -99,7 +96,7 @@
             font-family: 'Georgia', serif;
             font-size: 34px;
             font-weight: bold;
-            color: #3b5998; /* Azul clássico de layouts antigos */
+            color: #3b5998;
             margin: 5px 0 2px 0;
             text-align: center;
             letter-spacing: -0.5px;
@@ -113,14 +110,6 @@
             font-weight: bold;
         }
 
-        /* Divisor pontilhado horizontal clássico do seu print */
-        .dashed-line {
-            width: 100%;
-            border-bottom: 1px dashed #cbd5e1;
-            margin-bottom: 15px;
-        }
-
-        /* Moldura Polaroid Perfeita do Desenho */
         .art-cover-wrapper {
             background: white;
             padding: 14px 14px 64px 14px;
@@ -155,12 +144,12 @@
             font-style: italic;
         }
 
-        /* Painel Superior do Player Arredondado */
+        /* Painel Superior do Player */
         .player-panel {
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
             border-radius: 20px;
-            padding: 12px;
+            padding: 14px;
             box-shadow: 0 8px 24px rgba(148, 163, 184, 0.15);
         }
 
@@ -254,44 +243,77 @@
             line-height: 1.3;
         }
 
+        /* Botões Maiores e Evidentes Estilo Equipamento Retrô */
         .cassette-footer {
-            margin-top: 14px;
+            margin-top: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .layout-signature {
             font-size: 10px;
             color: #b3839b;
             font-weight: bold;
+        }
+
+        .control-actions {
+            display: flex;
+            gap: 8px;
         }
 
         .control-actions button {
-            background: none;
-            border: none;
+            background: #ffffff;
+            border: 2px solid #b85b88;
+            border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 10px;
-            cursor: pointer;
-            color: #b3839b;
+            font-size: 12px;
             font-weight: bold;
-            padding: 2px 6px;
-            text-transform: uppercase;
+            color: #b85b88;
+            cursor: pointer;
+            padding: 8px 14px;
+            box-shadow: 0 4px 0px #943d66; /* Efeito 3D clássico */
+            transition: all 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .control-actions button:hover {
+            background: #fff0f5;
+            transform: translateY(1px);
+            box-shadow: 0 3px 0px #943d66;
+        }
+
+        .control-actions button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0px #943d66; /* Botão totalmente afundado */
+        }
+
+        /* Caixa de Notas Muito Mais Destacada e Bonitinha */
+        .track-notes-panel {
+            background: #fff5f8;
+            border: 2px dashed #e2aec7;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 14px;
+            color: #8c4366;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05);
+            line-height: 1.5;
+        }
+
+        .note-highlight {
+            font-family: 'Georgia', serif;
+            font-size: 15px;
+            font-weight: bold;
+            font-style: italic;
+            display: block;
+            margin-top: 4px;
             color: #b85b88;
         }
 
-        .track-notes-panel {
-            background: white;
-            border: 1px solid #e2ebf0;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 13px;
-            color: #64748b;
-            text-align: center;
-            font-style: italic;
-            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.05);
-        }
-
+        /* Painel Inferior da Lista de Músicas */
         .tracklist-panel {
             background: white;
             border: 1px solid #cbd5e1;
@@ -338,29 +360,6 @@
         .track-number {
             width: 35px;
             color: #b85b88;
-            font-weight: bold;
-            font-size: 11px;
-        }
-
-        .track-title {
-            flex-grow: 1;
-            padding-right: 15px;
-            font-weight: bold;
-        }
-
-        .track-artist {
-            color: #94a3b8;
-            text-align: right;
-        }
-
-        .track-item.active-track .track-artist {
-            color: #b85b88;
-        }
-
-        .footer-note {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 13px;
 Use o código com cuidado.
     </style>
 </head>
@@ -428,55 +427,55 @@ Use o código com cuidado.
                 <span>THE BACK OF THE TAPE</span>
             </div>
             <div id="playlist">
-                <div class="track-item" data-index="0" data-src="musicas/01.mp3" data-note="Uma música que lembra você" onclick="selectTrack(this)">
-                    <span class="track-number">01</span>
-                    <span class="track-title">Be Quiet and Drive (Far Away)</span>
-                    <span class="track-artist">Deftones</span>
+                                  <div class="track-item" data-index="0" data-src="musicas/01.mp3" data-note="Uma música que te lembra" onclick="selectTrack(this)">
+                        <span class="track-number">01</span>
+                        <span class="track-title">Be Quiet and Drive (Far Away)</span>
+                        <span class="track-artist">Deftones</span>
+                    </div>
+                    <div class="track-item" data-index="1" data-src="musicas/02.mp3" data-note="Uma música que ela me apresentou" onclick="selectTrack(this)">
+                        <span class="track-number">02</span>
+                        <span class="track-title">Peso</span>
+                        <span class="track-artist">A$AP Rocky</span>
+                    </div>
+                    <div class="track-item" data-index="2" data-src="musicas/03.mp3" data-note="Uma música que combina com o gosto dela" onclick="selectTrack(this)">
+                        <span class="track-number">03</span>
+                        <span class="track-title">Luv (sic) pt3</span>
+                        <span class="track-artist">Nujabes, Shing02</span>
+                    </div>
+                    <div class="track-item" data-index="3" data-src="musicas/04.mp3" data-note="Uma descoberta que eu quero compartilhar" onclick="selectTrack(this)">
+                        <span class="track-number">04</span>
+                        <span class="track-title">dltt (Delatete) — Sadesper Record...</span>
+                        <span class="track-artist">Coaltar Of The Deepers</span>
+                    </div>
+                    <div class="track-item" data-index="4" data-src="musicas/05.mp3" data-note="Uma música que nós gostamos" onclick="selectTrack(this)">
+                        <span class="track-number">05</span>
+                        <span class="track-title">D&gt;E&gt;A&gt;T&gt;H&gt;M&gt;E&gt;T&gt;A&gt;L</span>
+                        <span class="track-artist">Panchiko</span>
+                    </div>
+                    <div class="track-item" data-index="5" data-src="musicas/06.mp3" data-note="Uma música aconchegante" onclick="selectTrack(this)">
+                        <span class="track-number">06</span>
+                        <span class="track-title">Back to the Old House</span>
+                        <span class="track-artist">The Smiths</span>
+                    </div>
+                    <div class="track-item" data-index="6" data-src="musicas/07.mp3" data-note="Uma música que você gostaria que ela conhecesse" onclick="selectTrack(this)">
+                        <span class="track-number">07</span>
+                        <span class="track-title">Here, There and Everywhere</span>
+                        <span class="track-artist">The Beatles</span>
+                    </div>
+                    <div class="track-item" data-index="7" data-src="musicas/08.mp3" data-note="Uma música para fechar a mixtape" onclick="selectTrack(this)">
+                        <span class="track-number">08</span>
+                        <span class="track-title">The Spins</span>
+                        <span class="track-artist">Mac Miller, Empire of the Sun</span>
+                    </div>
+                    <div class="track-item" data-index="8" data-src="musicas/09.mp3" data-note="Mais uma música incrível do Deftones para completar o nosso set" onclick="selectTrack(this)">
+                        <span class="track-number">09</span>
+                        <span class="track-title">I think about you all the time</span>
+                        <span class="track-artist">Deftones</span>
+                    </div>
                 </div>
-                <div class="track-item" data-index="1" data-src="musicas/02.mp3" data-note="Uma música que você me apresentou" onclick="selectTrack(this)">
-                    <span class="track-number">02</span>
-                    <span class="track-title">Peso</span>
-                    <span class="track-artist">A$AP Rocky</span>
-                </div>
-                <div class="track-item" data-index="2" data-src="musicas/03.mp3" data-note="Uma música que combina com o seu gosto" onclick="selectTrack(this)">
-                    <span class="track-number">03</span>
-                    <span class="track-title">Luv (sic) pt3</span>
-                    <span class="track-artist">Nujabes, Shing02</span>
-                </div>
-                <div class="track-item" data-index="3" data-src="musicas/04.mp3" data-note="Uma descoberta que eu quero compartilhar" onclick="selectTrack(this)">
-                    <span class="track-number">04</span>
-                    <span class="track-title">dl++ (Delatetel) — Sadesper Record Mix</span>
-                    <span class="track-artist">Coaltar Of The Deepers</span>
-                </div>
-                <div class="track-item" data-index="4" data-src="musicas/05.mp3" data-note="Uma música que nós gostamos" onclick="selectTrack(this)">
-                    <span class="track-number">05</span>
-                    <span class="track-title">D&gt;E&gt;A&gt;T&gt;H&gt;M&gt;E&gt;T&gt;A&gt;L</span>
-                    <span class="track-artist">Panchiko</span>
-                </div>
-                <div class="track-item" data-index="5" data-src="musicas/06.mp3" data-note="Uma música aconchegante" onclick="selectTrack(this)">
-                    <span class="track-number">06</span>
-                    <span class="track-title">Back to the Old House</span>
-                    <span class="track-artist">The Smiths</span>
-                </div>
-                <div class="track-item" data-index="6" data-src="musicas/07.mp3" data-note="Uma música que eu gostaria que ela conhecesse" onclick="selectTrack(this)">
-                    <span class="track-number">07</span>
-                    <span class="track-title">Here, There and Everywhere</span>
-                    <span class="track-artist">The Beatles</span>
-                </div>
-                <div class="track-item" data-index="7" data-src="musicas/08.mp3" data-note="Uma música que você gosta bastante" onclick="selectTrack(this)">
-                    <span class="track-number">08</span>
-                    <span class="track-title">The Spins</span>
-                    <span class="track-artist">Mac Miller, Empire of the Sun</span>
-                </div>
-                <!-- Nova Faixa Adicionada com Sucesso -->
-                <div class="track-item" data-index="8" data-src="musicas/09.mp3" data-note="Especial escolhida por você mesma!!!!" onclick="selectTrack(this)">
-                    <span class="track-number">09</span>
-                    <span class="track-title">I think about you all the time</span>
-                    <span class="track-artist">Deftones</span>
-                </div>
+                
+                <div class="footer-note">Mia bobona ♡</div>
             </div>
-            
-            <div class="footer-note">Mia bobona ♡</div>
         </div>
     </div>
 
@@ -498,30 +497,30 @@ Use o código com cuidado.
         const artist = element.querySelector('.track-artist').textContent;
         const note = element.getAttribute('data-note');
         
-        display.innerHTML = `PLAYING: ${title} - ${artist}`;
-        notesDisplay.innerHTML = `💌 <strong>Nota:</strong> "${note}"`;
+        display.innerHTML = `PLAYING:<br>${title}<br><span style="color:#aa88aa">${artist}</span>`;
+        notesDisplay.innerHTML = `🎵 <strong>Nota da Faixa:</strong> <span class="note-highlight">"${note}"</span>`;
         
         audioPlayer.src = element.getAttribute('data-src');
         audioPlayer.play().catch(err => {
-            display.innerHTML = `CLICK PLAY TO START: ${title}`;
+            display.innerHTML = `CLICK PLAY TO START:<br>${title}`;
         });
         cassette.classList.add('playing');
-        playBtn.textContent = "PAUSE ⏸";
+        playBtn.innerHTML = "PAUSE ⏸";
     }
 
     function togglePlay() {
         if (currentTrackIndex === -1 && tracks.length > 0) {
-            selectTrack(tracks[0]);
+            selectTrack(tracks);
             return;
         }
         if (audioPlayer.paused) {
             audioPlayer.play();
             cassette.classList.add('playing');
-            playBtn.textContent = "PAUSE ⏸";
+            playBtn.innerHTML = "PAUSE ⏸";
         } else {
             audioPlayer.pause();
             cassette.classList.remove('playing');
-            playBtn.textContent = "PLAY ▶";
+            playBtn.innerHTML = "PLAY ▶";
         }
     }
 
@@ -545,7 +544,7 @@ Use o código com cuidado.
             selectTrack(tracks[nextIndex]);
         } else {
             cassette.classList.remove('playing');
-            playBtn.textContent = "PLAY ▶";
+            playBtn.innerHTML = "PLAY ▶";
             display.innerHTML = "THE END ♡";
             notesDisplay.innerHTML = "Fim da mixtape! Obrigado por ouvir tudo ♡";
             tracks.forEach(t => t.classList.remove('active-track'));
