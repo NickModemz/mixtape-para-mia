@@ -611,7 +611,7 @@
     </div>
 
 <script>
-        const audioPlayer = document.getElementById('mixtape-player');
+    const audioPlayer = document.getElementById('mixtape-player');
     const playBtn = document.getElementById('btn-play');
     const cassette = document.getElementById('cassette-container');
     const display = document.getElementById('live-display');
@@ -620,37 +620,40 @@
     let currentTape = 'mixtape';
 
     // 💿 BANCO DE DADOS DE ÁLBUNS E FITAS COLECIONÁVEIS
+        // 💿 SUA BIBLIOTECA DE FITAS CORRIGIDA E SEM ERROS DE SINTAXE
     const tapeLibrary = {
         mixtape: {
             name: "Mixtape Vol. 008",
             title: "For Brilhos",
             subtitle: "SIDE A · A MIXTAPE FOR MIA",
             colorClass: "tape-pink",
-            coverImg: "desenho.jpg", 
+            albumCover: "",
             tracks: [
-                { num: "01", title: "Be Quiet and Drive (Far Away)", artist: "Deftones", src: "musicas/01.mp3", note: "Uma música que lembra você" },
-                { num: "02", title: "Peso", artist: "A$AP Rocky", src: "musicas/02.mp3", note: "Uma música que você me apresentou" },
-                { num: "03", title: "Luv (sic) pt3", artist: "Nujabes, Shing02", src: "musicas/03.mp3", note: "Uma música que combina com o seu gosto" },
-                { num: "04", title: "dl++ (Delatetel)", artist: "Coaltar Of The Deepers", src: "musicas/04.mp3", note: "Uma descoberta que eu quero compartilhar" },
+                { num: "01", title: "Be Quiet and Drive (Far Away)", artist: "Deftones", src: "musicas/01.mp3", note: "Uma música que te lembra" },
+                { num: "02", title: "Peso", artist: "A$AP Rocky", src: "musicas/02.mp3", note: "Uma música que ela me apresentou" },
+                { num: "03", title: "Luv (sic) pt3", artist: "Nujabes, Shing02", src: "musicas/03.mp3", note: "Uma música que combina com o gosto dela" },
+                { num: "04", title: "dltt (Delatete)", artist: "Coaltar Of The Deepers", src: "musicas/04.mp3", note: "Uma descoberta que eu quero compartilhar" },
                 { num: "05", title: "D>E>A>T>H>M>E>T>A>L", artist: "Panchiko", src: "musicas/05.mp3", note: "Uma música que nós gostamos" },
                 { num: "06", title: "Back to the Old House", artist: "The Smiths", src: "musicas/06.mp3", note: "Uma música aconchegante" },
-                { num: "07", title: "Here, There and Everywhere", artist: "The Beatles", src: "musicas/07.mp3", note: "Uma música que eu gostaria que você conhecesse" },
-                { num: "08", title: "The Spins", artist: "Mac Miller", src: "musicas/08.mp3", note: "Uma música que você gosta bastante" },
-                { num: "09", title: "I think about you all the time", artist: "Deftones", src: "musicas/09.mp3", note: "Uma especial escolhida por você mesma! Espero que tenha gostado" }
+                { num: "07", title: "Here, There and Everywhere", artist: "The Beatles", src: "musicas/07.mp3", note: "Uma música que você gostaria que ela conhecesse" },
+                { num: "08", title: "The Spins", artist: "Mac Miller", src: "musicas/08.mp3", note: "Uma música para fechar a mixtape" },
+                { num: "09", title: "I think about you all the time", artist: "Deftones", src: "musicas/09.mp3", note: "Mais uma música incrível do Deftones para completar o nosso set" }
             ]
         },
-            panchiko_deathmetal: {
+        panchiko_deathmetal: {
             name: "Panchiko - DEATHMETAL", 
             title: "D>E>A>T>H>M>E>T>A>L",      
             subtitle: "SIDE B · FULL ALBUM",
-            colorClass: "tape-purple", // Cor roxa super Y2K que combina com o Panchiko
+            colorClass: "tape-purple",
             albumCover: "panchiko_cover.jpg", 
             tracks: [
-                { num: "01", title: "D>E>A>T>H>M>E>T>A>L", artist: "Panchiko", src: "musicas/panchiko_01.mp3", note: "A música que dá nome ao álbum, simplesmente perfeita." },
-                { num: "02", title: "Stabilisers for Big Boys", artist: "Panchiko", src: "musicas/panchiko_02.mp3", note: "Essa vibe lo-fi ruidosa antiga é incrível!" },
-                { num: "03", title: "Laputa", artist: "Panchiko", src: "musicas/panchiko_03.mp3", note: "Uma das mais aconchegantes de ouvir." }
+                { num: "01", title: "D>E>A>T>H>M>E>T>A>L", artist: "Panchiko", src: "musicas/panchiko_deathmetal/01.mp3", note: "A música que dá nome ao álbum, simplesmente perfeita." },
+                { num: "02", title: "Stabilisers for Big Boys", artist: "Panchiko", src: "musicas/panchiko_deathmetal/02.mp3", note: "Essa vibe lo-fi ruidosa antiga é incrível!" },
+                { num: "03", title: "Laputa", artist: "Panchiko", src: "musicas/panchiko_deathmetal/03.mp3", note: "Uma das mais aconchegantes de ouvir." }
             ]
         }
+    };
+
     // Gera a lista de fitas cadastradas no menu superior de forma automática
     function generateLibraryMenu() {
         const menuContainer = document.getElementById('tape-library-list');
