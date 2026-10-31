@@ -607,76 +607,140 @@
     </div>
 
 <script>
-    const audioPlayer = document.getElementById('mixtape-player');
+        const audioPlayer = document.getElementById('mixtape-player');
     const playBtn = document.getElementById('btn-play');
     const cassette = document.getElementById('cassette-container');
     const display = document.getElementById('live-display');
     const notesDisplay = document.getElementById('notes-display');
-    const tracks = document.querySelectorAll('.track-item');
     let currentTrackIndex = -1;
+    let currentTape = 'mixtape';
 
-    function selectTrack(element) {
-        tracks.forEach(t => t.classList.remove('active-track'));
-        element.classList.add('active-track');
-        currentTrackIndex = parseInt(element.getAttribute('data-index'));
+    // 💿 BANCO DE DADOS DE FITAS (Você pode adicionar quantas quiser aqui!)
+    const tapeLibrary = {
+        mixtape: {
+            title: "For Brilhos",
+            subtitle: "SIDE A · A MIXTAPE FOR MIA",
+            colorClass: "tape-pink",
+            tracks: [
+                { num: "01", title: "Be Quiet and Drive (Far Away)", artist: "Deftones", src: "musicas/01.mp3", note: "Uma música que te lembra" },
+                { num: "02", title: "Peso", artist: "A$AP Rocky", src: "musicas/02.mp3", note: "Uma música que ela me apresentou" },
+                { num: "03", title: "Luv (sic) pt3", artist: "Nujabes", src: "musicas/03.mp3", note: "Uma música que combina com o gosto dela" },
+                { num: "04", title: "dltt (Delatete)", artist: "Coaltar Of The Deepers", src: "musicas/04.mp3", note: "Uma descoberta que eu quero compartilhar" },
+                { num: "05", title: "D>E>A>T>H>M>E>T>A>L", artist: "Panchiko", src: "musicas/05.mp3", note: "Uma música que nós gostamos" },
+                { num: "06", title: "Back to the Old House", artist: "The Smiths", src: "musicas/06.mp3", note: "Uma música aconchegante" },
+                { num: "07", title: "Here, There and Everywhere", artist: "The Beatles", src: "musicas/07.mp3", note: "Uma música que você gostaria que ela conhecesse" },
+                { num: "08", title: "The Spins", artist: "Mac Miller", src: "musicas/08.mp3", note: "Uma música para fechar a mixtape" },
+                { num: "09", title: "I think about you all the time", artist: "Deftones", src: "musicas/09.mp3", note: "Mais uma música incrível do Deftones para completar" }
+            ]
+        },
+        deftones: {
+            title: "Deftones Club",
+            subtitle: "SIDE B · FULL ALBUM SELECTION",
+            colorClass: "tape-blue",
+            tracks: [
+                { num: "01", title: "Change (In the House of Flies)", artist: "Deftones", src: "musicas/deftones_01.mp3", note: "Um clássico absoluto que não podia faltar na biblioteca!" },
+                { num: "02", title: "Cherry Waves", artist: "Deftones", src: "musicas/deftones_02.mp3", note: "Essa atmosfera é incrível, ouve com atenção." },
+                { num: "03", title: "Sextape", artist: "Deftones", src: "musicas/deftones_03.mp3", note: "Uma das melhores melodias deles na minha opinião." }
+            ]
+        }
+    };
+
+    // Renderiza a lista de músicas da fita selecionada na tela
+    function loadTapePlaylist(tapeKey) {
+        const playlistDiv = document.getElementById('playlist');
+        playlistDiv.innerHTML = '';
+        currentTape = tapeKey;
         
-        const title = element.querySelector('.track-title').textContent;
-        const artist = element.querySelector('.track-artist').textContent;
-        const note = element.getAttribute('data-note');
+        // Atualiza os textos físicos fixados na etiqueta da fita rosa/azul
+        document.querySelector('.label-title').textContent = tapeLibrary[tapeKey].title;
+        document.querySelector('.label-subtitle').textContent = tapeLibrary[tapeKey].subtitle;
         
-        display.innerHTML = `PLAYING:<br>${title}<br><span style="color:#aa88aa">${artist}</span>`;
-        notesDisplay.innerHTML = `🎵 <strong>Nota da Faixa:</strong> <span class="note-highlight">"${note}"</span>`;
-        
-        audioPlayer.src = element.getAttribute('data-src');
-        audioPlayer.play().catch(err => {
-            display.innerHTML = `CLICK PLAY TO START:<br>${title}`;
+        // Aplica a cor correspondente no deck da fita
+        cassette.className = `cassette-player ${tapeLibrary[tapeKey].colorClass}`;
+
+        tapeLibrary[tapeKey].tracks.forEach((track, index) => {
+            const item = document.createElement('div');
+            item.className = 'track-item';
+            item.setAttribute('onclick', `selectTrackByIndex(${index})`);
+            if(index === currentTrackIndex && cassette.classList.contains('playing')) item.classList.add('active-track');
+
+            item.innerHTML = `
+                <div class="track-left">
+                    <span class="track-number">${track.num}</span>
+                    <span class="track-title">${track.title}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="track-artist">${track.artist}</span>
+                    <a href="${track.src}" download="${track.title}.mp3" class="download-icon" onclick="event.stopPropagation();">💾</a>
+                </div>
+            `;
+            playlistDiv.appendChild(item);
         });
+    }
+
+    // Altera a fita ativa ao clicar nos botões do menu
+    function switchCassette(tapeKey, buttonElement) {
+        document.querySelectorAll('.tape-tab-btn').forEach(btn => btn.classList.remove('active-tape'));
+        buttonElement.classList.add('active-tape');
+        audioPlayer.pause();
+        cassette.classList.remove('playing');
+        playBtn.innerHTML = "PLAY ▶";
+        currentTrackIndex = -1;
+        display.innerHTML = "CHOOSE A TRACK<br>TO START THE TAPE";
+        loadTapePlaylist(tapeKey);
+    }
+
+    function selectTrackByIndex(index) {
+        currentTrackIndex = index;
+        const track = tapeLibrary[currentTape].tracks[index];
+        
+        document.querySelectorAll('.track-item').forEach((t, i) => {
+            t.classList.toggle('active-track', i === index);
+        });
+        
+        display.innerHTML = `PLAYING:<br>${track.title}<br><span style="color:#aa88aa">${track.artist}</span>`;
+        notesDisplay.innerHTML = `🎵 <strong>Nota da Faixa:</strong> <span class="note-highlight">"${track.note}"</span>`;
+        
+        audioPlayer.src = track.src;
+        audioPlayer.play().catch(err => { display.innerHTML = `CLICK PLAY TO START:<br>${track.title}`; });
         cassette.classList.add('playing');
         playBtn.innerHTML = "PAUSE ⏸";
     }
 
     function togglePlay() {
-        if (currentTrackIndex === -1 && tracks.length > 0) {
-            selectTrack(tracks);
-            return;
-        }
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            cassette.classList.add('playing');
-            playBtn.innerHTML = "PAUSE ⏸";
-        } else {
-            audioPlayer.pause();
-            cassette.classList.remove('playing');
-            playBtn.innerHTML = "PLAY ▶";
-        }
+        if (currentTrackIndex === -1) { selectTrackByIndex(0); return; }
+        if (audioPlayer.paused) { audioPlayer.play(); cassette.classList.add('playing'); playBtn.innerHTML = "PAUSE ⏸"; } 
+        else { audioPlayer.pause(); cassette.classList.remove('playing'); playBtn.innerHTML = "PLAY ▶"; }
     }
 
     function playPrev() {
         if (currentTrackIndex === -1) return;
         let prevIndex = currentTrackIndex - 1;
-        if (prevIndex < 0) prevIndex = tracks.length - 1;
-        selectTrack(tracks[prevIndex]);
+        if (prevIndex < 0) prevIndex = tapeLibrary[currentTape].tracks.length - 1;
+        selectTrackByIndex(prevIndex);
     }
 
     function playNext() {
         if (currentTrackIndex === -1) return;
         let nextIndex = currentTrackIndex + 1;
-        if (nextIndex >= tracks.length) nextIndex = 0;
-        selectTrack(tracks[nextIndex]);
+        if (nextIndex >= tapeLibrary[currentTape].tracks.length) nextIndex = 0;
+        selectTrackByIndex(nextIndex);
     }
 
     audioPlayer.addEventListener('ended', () => {
         let nextIndex = currentTrackIndex + 1;
-        if (nextIndex < tracks.length) {
-            selectTrack(tracks[nextIndex]);
-        } else {
-            cassette.classList.remove('playing');
-            playBtn.innerHTML = "PLAY ▶";
-            display.innerHTML = "THE END ♡";
-            notesDisplay.innerHTML = "Fim da mixtape! Obrigado por ouvir tudo ♡";
-            tracks.forEach(t => t.classList.remove('active-track'));
+        if (nextIndex < tapeLibrary[currentTape].tracks.length) { selectTrackByIndex(nextIndex); } 
+        else {
+            cassette.classList.remove('playing'); playBtn.innerHTML = "PLAY ▶";
+            display.innerHTML = "THE END ♡"; notesDisplay.innerHTML = "Fim da mixtape! Obrigado por ouvir tudo ♡";
+            document.querySelectorAll('.track-item').forEach(t => t.classList.remove('active-track'));
             currentTrackIndex = -1;
         }
+    });
+
+    // Inicializa a primeira fita na tela assim que o site abre
+    document.addEventListener("DOMContentLoaded", () => { loadTapePlaylist('mixtape'); });
+
     });
 </script>
 </body>
