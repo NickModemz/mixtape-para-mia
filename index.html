@@ -685,6 +685,17 @@
         
         // Muda a classe de cor da fita cassete
         if (cassette) cassette.className = `cassette-player ${tapeLibrary[tapeKey].colorClass}`;
+        // 🖼️ Abre a capa do álbum menor abaixo do player se ela existir no banco de dados
+        const coverPanel = document.getElementById('album-cover-panel');
+        const coverImg = document.getElementById('current-album-img');
+        if (coverPanel && coverImg) {
+            if (tapeLibrary[tapeKey].albumCover) {
+                coverImg.src = tapeLibrary[tapeKey].albumCover;
+                coverPanel.style.display = 'block'; // Mostra a capinha menor
+            } else {
+                coverPanel.style.display = 'none';  // Esconde na primeira fita para manter limpo
+            }
+        }
 
         // Destaca o item ativo no menu em lista
         document.querySelectorAll('.library-item').forEach(el => el.classList.remove('active-tape-item'));
