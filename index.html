@@ -71,7 +71,77 @@
             flex-grow: 1;
             max-width: 320px;
         }
+        .profiles-container {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+        }
+        .profile-card {
+            flex: 1;
+            background: #fafbfc;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .profile-card.mia-card { border-color: #e2aec7; background: #fffcfd; }
+        .profile-card.nick-card { border-color: #b4c6d4; background: #fafdff; }
+        
+        .profile-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            border: 2px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: white;
+        }
+        .mia-card .profile-avatar { border-color: #e2aec7; }
+        .nick-card .profile-avatar { border-color: #b4c6d4; }
 
+        .profile-name {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .mia-card .profile-name { color: #b85b88; }
+        .nick-card .profile-name { color: #3b5998; }
+
+        .profile-status-display {
+            font-size: 11px;
+            font-weight: bold;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            width: 90%;
+            text-align: center;
+            min-height: 16px;
+        }
+        .mia-card .profile-status-display { border-color: #f2d1e1; color: #8c4366; }
+        .nick-card .profile-status-display { border-color: #d2e4f0; color: #2c3e50; }
+
+        .status-select-retro {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            width: 95%;
+            color: #555;
+        }
         .page-content-wrapper {
             width: 100%;
             max-width: 480px;
@@ -425,7 +495,35 @@
         </div>
         
         <audio id="mixtape-player" preload="auto"></audio>
+        <div class="profiles-container">
+                <!-- Perfil da Bri -->
+                <div class="profile-card mia-card">
+                    <div class="profile-avatar">🎧</div>
+                    <div class="profile-name">Bri ♡</div>
+                    <div class="profile-status-display" id="mia-status-text">😊 Feliz</div>
+                    <select id="mia-status-select" class="status-select-retro" onchange="updateRetroStatus('mia')">
+                        <option value="😊 Feliz">😊 Feliz</option>
+                        <option value="😴 Com sono">😴 Com sono</option>
+                        <option value="🍕 Com fome">🍕 Com fome</option>
+                        <option value="😠 Brava">😠 Brava</option>
+                        <option value="📝 Ocupada">📝 Ocupada</option>
+                    </select>
+                </div>
 
+                <!-- Perfil do Nick -->
+                <div class="profile-card nick-card">
+                    <div class="profile-avatar">🎮</div>
+                    <div class="profile-name">Nick ✨</div>
+                    <div class="profile-status-display" id="nick-status-text">😎 Online</div>
+                    <select id="nick-status-select" class="status-select-retro" onchange="updateRetroStatus('nick')">
+                        <option value="😎 Online">😎 Online</option>
+                        <option value="🥱 Ouvindo Deftones">🥱 Ouvindo Deftones</option>
+                        <option value="💤 Offline">💤 Offline</option>
+                        <option value="💢 Com raiva">💢 Com raiva</option>
+                        <option value="🎮 Jogando">🎮 Jogando</option>
+                    </select>
+                </div>
+            </div>
         <!-- Painel do Player Arredondado -->
         <div class="player-panel">
             <div class="cassette-player" id="cassette-container">
@@ -611,6 +709,32 @@
             currentTrackIndex = -1;
         }
     });
+</script>
+<script>
+    // Carrega os status salvos no navegador ao abrir o site
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedMiaStatus = localStorage.getItem('retroStatusMia') || "😊 Feliz";
+        const savedNickStatus = localStorage.getItem('retroStatusNick') || "😎 Online";
+        
+        document.getElementById('mia-status-text').textContent = savedMiaStatus;
+        document.getElementById('mia-status-select').value = savedMiaStatus;
+        
+        document.getElementById('nick-status-text').textContent = savedNickStatus;
+        document.getElementById('nick-status-select').value = savedNickStatus;
+    });
+
+    // Função que atualiza e salva o status escolhido
+    function updateRetroStatus(user) {
+        if (user === 'mia') {
+            const selectValue = document.getElementById('mia-status-select').value;
+            document.getElementById('mia-status-text').textContent = selectValue;
+            localStorage.setItem('retroStatusMia', selectValue);
+        } else if (user === 'nick') {
+            const selectValue = document.getElementById('nick-status-select').value;
+            document.getElementById('nick-status-text').textContent = selectValue;
+            localStorage.setItem('retroStatusNick', selectValue);
+        }
+    }
 </script>
 </body>
 </html>
