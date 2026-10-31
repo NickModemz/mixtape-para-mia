@@ -141,7 +141,67 @@
             box-shadow: 2px 2px 6px rgba(0,0,0,0.03);
             font-style: italic;
         }
+        /* MENU RETRÔ DE SELEÇÃO DE FITAS */
+        .tape-selector-panel {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 12px;
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.08);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .tape-selector-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .tape-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .tape-tab-btn {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            font-weight: bold;
+            color: #64748b;
+            cursor: pointer;
+            padding: 6px 12px;
+            box-shadow: 0 3px 0px #cbd5e1;
+            transition: all 0.1s;
+            white-space: nowrap;
+        }
+        .tape-tab-btn.active-tape {
+            background: #fff0f5;
+            border-color: #b85b88;
+            color: #b85b88;
+            box-shadow: 0 1px 0px #cbd5e1;
+        }
 
+        /* Classes para mudar a cor da fita dinamicamente */
+        .cassette-player.tape-pink { background-color: #f7d1e3; border-color: #e2aec7; }
+        .cassette-player.tape-blue { background-color: #d6e4f0; border-color: #a3c2dc; }
+        
+        /* Botão de Download na lista de músicas */
+        .download-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 6px;
+            color: #94a3b8;
+            transition: transform 0.1s;
+        }
+        .download-icon:hover { transform: scale(1.2); color: #b85b88; }
         /* Painel Superior do Player Arredondado */
         .player-panel {
             background: #f1f5f9;
